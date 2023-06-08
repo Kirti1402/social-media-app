@@ -7,25 +7,21 @@ import "./Login.css";
 import MainBanner from "./MainBanner";
 
 export default function LoginPage() {
-  const { authState, authDispatch, login, inputValidation ,error,setIsLoggedIn} =
-    useContext(authContext);
+  const { authState, authDispatch, setIsLoggedIn } = useContext(authContext);
 
   const onClickHandleLogin = () => {
-    setIsLoggedIn(true)
-    inputValidation();
-
+    setIsLoggedIn(true);
   };
 
   const handleGuestLogin = () => {
     authDispatch({ type: "SET_USERNAME", payload: "Kittu@0128" });
     authDispatch({ type: "SET_PASSWORD", payload: "aspoghmz." });
 
-    inputValidation();
-    setIsLoggedIn(true)
+    setIsLoggedIn(true);
   };
   return (
     <div className="login-conatiner">
-      <MainBanner/>
+      <MainBanner />
       <div className="login-form-container">
         <h1>LOG IN</h1>
         <Box
@@ -57,11 +53,16 @@ export default function LoginPage() {
             }
           />
         </Box>
-          <div className="log-btn">
-            <Button variant="contained" size="small" color="primary" onClick={onClickHandleLogin}>
-              Log In
-            </Button>
-          </div>
+        <div className="log-btn">
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            onClick={onClickHandleLogin}
+          >
+            Log In
+          </Button>
+        </div>
         <div className="log-btn">
           <Button size="small" color="primary" onClick={handleGuestLogin}>
             Guest Login
