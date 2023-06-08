@@ -1,19 +1,18 @@
 import { createContext, useEffect, useState, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import { authInitialState, authReducer } from "../Reducer/AuthReducer";
 import {
   userDataIntialState,
   userDataReducer,
 } from "../Reducer/UserDataReducer";
-import { useNavigate } from "react-router-dom";
-import { toHaveStyle } from "@testing-library/jest-dom/matchers";
-import { toast } from "react-toastify";
 
 export const authContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [error, setError] = useState("");
   const [authState, authDispatch] = useReducer(authReducer, authInitialState);
   const [userDataState, userDataDispatch] = useReducer(
     userDataReducer,
@@ -48,7 +47,6 @@ export const AuthProvider = ({ children }) => {
       if (user.status !== 200) {
         setIsLoggedIn(false);
         toast.error(`${response.errors}`);
-        console.log("error", error);
       }
     } catch (e) {
       console.log(e);
@@ -59,7 +57,6 @@ export const AuthProvider = ({ children }) => {
     <authContext.Provider
       value={{
         setIsLoggedIn,
-        error,
         authState,
         authDispatch,
         isLoggedIn,
