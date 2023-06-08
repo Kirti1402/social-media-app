@@ -24,6 +24,8 @@ export const AuthProvider = ({ children }) => {
       login();
     }
   }, [authState.username, authState.password]);
+
+
   const login = async () => {
     try {
       const user = await fetch("/api/auth/login", {
@@ -41,12 +43,13 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("EncodedToken", response.encodedToken);
         localStorage.setItem("User", JSON.stringify(response.foundUser));
         userDataDispatch({ type: "SET_USER", payload: response.foundUser });
-        navigate("/home");
+        navigate("/");
         toast.success(`Successfully logged in`);
       }
       if (user.status !== 200) {
         setIsLoggedIn(false);
         toast.error(`${response.errors}`);
+        throw new Error(response.errors);
       }
     } catch (e) {
       console.log(e);

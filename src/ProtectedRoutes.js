@@ -7,7 +7,7 @@ export const ProtectedRoutes = ({children}) => {
     console.log("protected routes")
     return (
       <>
-        <Navigate to='/' />
+        <Navigate to='/login' />
       </>
     );
   }
