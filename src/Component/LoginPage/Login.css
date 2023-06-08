@@ -1,0 +1,31 @@
+.login-conatiner{
+    display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+img{
+    width:100%;
+}
+
+.text-container{
+    background-color: #FF6D60;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 900px 0;
+    border-bottom:2px solid black;
+    border-right:2px solid black;
+}
+.span-text{
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 12px;
+    color:#F9F5EB;
+}
+.login-form-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

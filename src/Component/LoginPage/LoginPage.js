@@ -3,6 +3,8 @@ import { authContext } from "../../Context/AuthContext";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import image from "../../Assets/AuthPageBanner.png"
+import "./Login.css"
 
 export default function LoginPage() {
   const { authState, authDispatch, login, inputValidation } =
@@ -17,7 +19,21 @@ export default function LoginPage() {
     authDispatch({ type: "SET_PASSWORD", payload: "aspoghmz." });
   };
   return (
-    <div>
+   <div className="login-conatiner">
+    <div className="text-container">
+        {/* <img src={image}/> */}
+        <div className="text-detail">
+        <h1 className="title">
+            <span>Explore</span>
+            <span>Together</span>
+            </h1>
+        <h4 >FOLLOW<span className="span-text">PEOPLE AROUND THE GLOBE</span></h4>
+        <h4>CONNECT<span className="span-text">WITH YOUR TRAVELLERS</span></h4>
+        <h4>SHARE<span className="span-text">YOUR EXPERIENCE</span></h4>
+        </div>
+        
+        </div>
+     <div className="login-form-container">
       <Box
         component="form"
         sx={{
@@ -30,7 +46,6 @@ export default function LoginPage() {
           id="outlined-basic"
           label="UserName"
           size="small"
-          label="UserName"
           variant="outlined"
           value={authState.username}
           onChange={(e) =>
@@ -58,6 +73,7 @@ export default function LoginPage() {
           Guest Login
         </Button>
       </div>
-    </div>
+      </div>
+   </div>
   );
 }
