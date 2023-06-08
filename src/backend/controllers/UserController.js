@@ -128,27 +128,16 @@ export const bookmarkPostHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
-        }
+          errors: ['The username you entered is not Registered. Not Found error'],
+        },
       );
     }
-    const isBookmarked = user.bookmarks.some(
-      (currPost) => currPost._id === postId
-    );
+    const isBookmarked = user.bookmarks.some((currPostId) => currPostId === postId);
     if (isBookmarked) {
-      return new Response(
-        400,
-        {},
-        { errors: ["This Post is already bookmarked"] }
-      );
+      return new Response(400, {}, { errors: ['This Post is already bookmarked'] });
     }
-    user.bookmarks.push(post);
-    this.db.users.update(
-      { _id: user._id },
-      { ...user, updatedAt: formatDate() }
-    );
+    user.bookmarks.push(post._id);
+    this.db.users.update({ _id: user._id }, { ...user, updatedAt: formatDate() });
     return new Response(200, {}, { bookmarks: user.bookmarks });
   } catch (error) {
     return new Response(
@@ -156,7 +145,7 @@ export const bookmarkPostHandler = function (schema, request) {
       {},
       {
         error,
-      }
+      },
     );
   }
 };
