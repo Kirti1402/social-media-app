@@ -17,8 +17,9 @@ img {
   justify-content: center;
   align-items: center;
   border-radius: 0 0 900px 0;
-  border-bottom: 2px solid black;
-  border-right: 2px solid black;
+  box-shadow: 0 0 2px 2px #DFDFDE;
+  /* border-bottom: 2px solid black;
+  border-right: 2px solid black; */
 }
 
 .title {
@@ -59,6 +60,14 @@ img {
 .sub-title-1 span {
   /* margin-left:20px; */
   animation: slidein 7s infinite;
+}
+
+.login-conatiner{
+    background-color: #F7F5F2;
+
+}
+.log-btn{
+    margin: 5px;
 }
 
 @keyframes showup {

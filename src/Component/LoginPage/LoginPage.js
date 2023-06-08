@@ -22,6 +22,7 @@ export default function LoginPage() {
     <div className="login-conatiner">
       <MainBanner/>
       <div className="login-form-container">
+        <h1>LOG IN</h1>
         <Box
           component="form"
           sx={{
@@ -50,13 +51,13 @@ export default function LoginPage() {
               authDispatch({ type: "SET_PASSWORD", payload: e.target.value })
             }
           />
-          <div>
+        </Box>
+          <div className="log-btn">
             <Button variant="contained" size="small" color="primary">
               Log In
             </Button>
           </div>
-        </Box>
-        <div>
+        <div className="log-btn">
           <Button size="small" color="primary" onClick={handleGuestLogin}>
             Guest Login
           </Button>
