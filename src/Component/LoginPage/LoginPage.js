@@ -7,16 +7,21 @@ import "./Login.css";
 import MainBanner from "./MainBanner";
 
 export default function LoginPage() {
-  const { authState, authDispatch, login, inputValidation } =
+  const { authState, authDispatch, login, inputValidation ,error,setIsLoggedIn} =
     useContext(authContext);
 
   const onClickHandleLogin = () => {
-    login();
+    setIsLoggedIn(true)
+    inputValidation();
+
   };
 
   const handleGuestLogin = () => {
     authDispatch({ type: "SET_USERNAME", payload: "Kittu@0128" });
     authDispatch({ type: "SET_PASSWORD", payload: "aspoghmz." });
+
+    inputValidation();
+    setIsLoggedIn(true)
   };
   return (
     <div className="login-conatiner">
@@ -53,7 +58,7 @@ export default function LoginPage() {
           />
         </Box>
           <div className="log-btn">
-            <Button variant="contained" size="small" color="primary">
+            <Button variant="contained" size="small" color="primary" onClick={onClickHandleLogin}>
               Log In
             </Button>
           </div>

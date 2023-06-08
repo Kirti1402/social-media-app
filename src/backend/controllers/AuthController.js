@@ -74,7 +74,7 @@ export const loginHandler = function (schema, request) {
         {},
         {
           errors: [
-            "The username you entered is not Registered. Not Found error",
+            "The username you entered is not Registered.",
           ],
         }
       );
@@ -91,7 +91,7 @@ export const loginHandler = function (schema, request) {
       {},
       {
         errors: [
-          "The credentials you entered are invalid. Unauthorized access error.",
+          "The credentials you entered are invalid.",
         ],
       }
     );
