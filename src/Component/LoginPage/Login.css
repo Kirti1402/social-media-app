@@ -1,31 +1,107 @@
-.login-conatiner{
-    display: grid;
+@import url("https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Moirai+One&display=swap");
+
+.login-conatiner {
+  display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100vh;
 }
 
-img{
-    width:100%;
+img {
+  width: 100%;
 }
 
-.text-container{
-    background-color: #FF6D60;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 0 900px 0;
-    border-bottom:2px solid black;
-    border-right:2px solid black;
+.text-container {
+  background-color: #ff6d60;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0 900px 0;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
 }
-.span-text{
-    margin-left: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    color:#F9F5EB;
+
+.title {
+  margin-bottom: 20px;
+  font-family: "Cherry Bomb One", cursive;
+  font-weight: 900;
+  font-size: 50px;
 }
-.login-form-container{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.title > * {
+  color: #222222;
+  margin: 5px;
+}
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-title {
+    color: #F8CB2E;
+  font-family: "Moirai One", cursive;
+  font-size: 20px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 900;
+}
+
+.sub-title > * {
+  animation: showup 2s infinite;
+}
+.sub-title-1 {
+  width: 0px;
+  animation: reveal 7s infinite;
+}
+
+.sub-title-1 span {
+  /* margin-left:20px; */
+  animation: slidein 7s infinite;
+}
+
+@keyframes showup {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: -800px;
+  }
+  20% {
+    margin-left: -800px;
+  }
+  35% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  20% {
+    opacity: 1;
+    width: 0px;
+  }
+  30% {
+    width: 355px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
 }
