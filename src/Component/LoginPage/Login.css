@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Moirai+One&display=swap");
 
-.login-conatiner {
+.login-signup-conatiner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100vh;
+  background-color: #f7f5f2;
 }
 
 img {
@@ -17,7 +18,7 @@ img {
   justify-content: center;
   align-items: center;
   border-radius: 0 0 900px 0;
-  box-shadow: 0 0 2px 2px #DFDFDE;
+  box-shadow: 0 0 2px 2px #dfdfde;
   /* border-bottom: 2px solid black;
   border-right: 2px solid black; */
 }
@@ -40,7 +41,7 @@ img {
 }
 
 .sub-title {
-    color: #F8CB2E;
+  color: #f8cb2e;
   font-family: "Moirai One", cursive;
   font-size: 20px;
   display: inline-block;
@@ -58,16 +59,11 @@ img {
 }
 
 .sub-title-1 span {
-  /* margin-left:20px; */
   animation: slidein 7s infinite;
 }
 
-.login-conatiner{
-    background-color: #F7F5F2;
-
-}
-.log-btn{
-    margin: 5px;
+.log-btn {
+  margin: 5px;
 }
 
 @keyframes showup {

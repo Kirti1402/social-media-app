@@ -20,7 +20,7 @@ export default function LoginPage() {
     setIsLoggedIn(true);
   };
   return (
-    <div className="login-conatiner">
+    <div className="login-signup-conatiner">
       <MainBanner />
       <div className="login-form-container">
         <h1>LOG IN</h1>
