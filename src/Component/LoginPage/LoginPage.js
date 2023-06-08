@@ -32,6 +32,7 @@ export default function LoginPage() {
           noValidate
           autoComplete="off"
         >
+          <div>
           <TextField
             id="outlined-basic"
             label="UserName"
@@ -42,6 +43,8 @@ export default function LoginPage() {
               authDispatch({ type: "SET_USERNAME", payload: e.target.value })
             }
           />
+          </div>
+          <div>
           <TextField
             id="outlined-basic"
             size="small"
@@ -52,6 +55,8 @@ export default function LoginPage() {
               authDispatch({ type: "SET_PASSWORD", payload: e.target.value })
             }
           />
+          </div>
+          
         </Box>
         <div className="log-btn">
           <Button
