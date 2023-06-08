@@ -4,11 +4,28 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { authContext } from "../../Context/AuthContext";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SignUpPage() {
   const navigate = useNavigate();
-  const { authState, authDispatch, setIsLoggedIn } = useContext(authContext);
+
+  const { authState, authDispatch, setIsLoggedIn,signUp } = useContext(authContext);
+  const onClickHandleSignUp = () => {
+    console.log(authState)
+    if (
+      authState.username &&
+      authState.password &&
+      authState.firstName &&
+      authState.lastName &&
+      authState.email
+    ) {
+      setIsLoggedIn(true);
+      signUp();
+    } else {
+      toast.warning("Please fill the form");
+    }
+  };
   return (
     <div className="login-signup-conatiner">
       <MainBanner />
@@ -87,12 +104,16 @@ function SignUpPage() {
           </div>
         </Box>
         <div className="log-btn">
-          <Button variant="contained" size="small" color="primary">
+          <Button variant="contained" size="small" color="primary" onClick={onClickHandleSignUp}>
             Sign Up
           </Button>
         </div>
         <div className="log-btn">
-          <Button size="small" color="primary" onClick={()=> navigate('/login')}>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => navigate("/login")}
+          >
             Log In
           </Button>
         </div>

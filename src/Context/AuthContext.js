@@ -13,7 +13,6 @@ export const authContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isSignedUp, setIsSignedUp] = useState(false);
   const [authState, authDispatch] = useReducer(authReducer, authInitialState);
   const [userDataState, userDataDispatch] = useReducer(
     userDataReducer,
@@ -23,9 +22,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (authState.username && authState.password && isLoggedIn) {
       login();
-    } else if(authState.username && authState.password && isSignedUp){
-      signUp();
-    }
+    } 
   }, [authState.username, authState.password]);
 
 
@@ -47,7 +44,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("User", JSON.stringify(response.foundUser));
         userDataDispatch({ type: "SET_USER", payload: response.foundUser });
         navigate("/");
-        toast.success(`Successfully logged in`);
+        toast.success(`Successfully Logged In`);
       }
       if (user.status !== 200) {
         setIsLoggedIn(false);
@@ -76,15 +73,15 @@ export const AuthProvider = ({ children }) => {
       const response = await user.json();
       console.log(response);
       // console.log(await user.json())
-      if (user.status == 200) {
+      console.log(user.status)
+      if (user.status == 201) {
         localStorage.setItem("EncodedToken", response.encodedToken);
-        localStorage.setItem("User", JSON.stringify(response.foundUser));
-        userDataDispatch({ type: "SET_USER", payload: response.foundUser });
+        localStorage.setItem("User", JSON.stringify(response.createdUser));
+        userDataDispatch({ type: "SET_USER", payload: response.createdUser });
         navigate("/");
-        toast.success(`Successfully logged in`);
-      }
-      if (user.status !== 200) {
-        setIsSignedUp(false);
+        toast.success(`Successfully Signed Up`);
+      }else{
+        setIsLoggedIn(false);
         toast.error(`${response.errors}`);
         throw new Error(response.errors);
       }
@@ -101,6 +98,7 @@ export const AuthProvider = ({ children }) => {
         authDispatch,
         isLoggedIn,
         login,
+        signUp
       }}
     >
       {children}
