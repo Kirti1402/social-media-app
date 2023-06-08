@@ -8,10 +8,6 @@
   background-color: #f7f5f2;
 }
 
-img {
-  width: 100%;
-}
-
 .text-container {
   background-color: #ff6d60;
   display: flex;
@@ -19,8 +15,6 @@ img {
   align-items: center;
   border-radius: 0 0 900px 0;
   box-shadow: 0 0 2px 2px #dfdfde;
-  /* border-bottom: 2px solid black;
-  border-right: 2px solid black; */
 }
 
 .title {
@@ -108,5 +102,50 @@ img {
   100% {
     opacity: 0;
     width: 355px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Adjust the layout for mobile devices */
+  .login-signup-conatiner {
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f7f5f2;
+  }
+
+  .text-container {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2px 2px #dfdfde;
+  }
+  .title >*{
+    text-align: center;
+  }
+
+  .sub-title >*{
+    animation: none;
+    text-align: center;
+  }
+  .sub-title-1{
+    animation: none;
+    text-align: center;
+  }
+
+  .sub-title-1 span{
+    animation: none;
+    text-align: center;
+  }
+
+
+  .sub-title {
+    color: white;
+    font-family: "Moirai One", cursive;
+    font-size: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 900;
   }
 }
