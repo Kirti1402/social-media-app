@@ -1,6 +1,7 @@
 export const profilIntialstate = {
     image:"",
-    imageError:""
+    imageError:"",
+    backgroundImage:""
 }
 
 export const profileReducer = (state, action) => {
@@ -10,6 +11,8 @@ export const profileReducer = (state, action) => {
             return {...state, image: action.payload}
         case "SET_IMAGE_ERROR":
             return {...state,imageError:action.payload}
+        case "SET_BACKGROUND_IMAGE":
+            return {...state,backgroundImage:action.payload}
 
     }
 }

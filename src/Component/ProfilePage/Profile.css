@@ -1,24 +1,41 @@
 .page-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    background-color: aqua;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.5fr; 
+  grid-gap: 10px;
+  background-color: aqua;
 }
 
-.profile-page{
-    background-color: antiquewhite;
-    height: 100vh;
+.profile-page {
+  background-color: antiquewhite;
+  height: 100vh;
 }
 
-img{
-    width: 100px;
-    height: 100px;
-    border-radius: 100%;
+.background-image-container {
+  border: 2px solid black;
 }
 
-.image-file-upload{
-    
-    display: none;
+.image-file-upload {
+  display: none;
 }
 
-  
+.background-file-upload {
+  width: 100%;
+  height: 150px;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border: 2px solid black;
+}
+.profile-card {
+  position: relative;
+  /* margin: 0 80px; */
+}
+.profile-image-container {
+  margin-left: 10px;
+  position: absolute;
+  bottom:0;
+  left: 0;
+}
