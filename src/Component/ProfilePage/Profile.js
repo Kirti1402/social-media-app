@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from '../HomePage/Header'
 import "./Profile.css"
-import ProfileDetail from './ProfileCard'
+import UserSuggestion from '../userSuggestion/UserSuggestion'
+import ProfileCard from './ProfileCard'
 
 export default function Profile() {
   return (
@@ -11,10 +12,10 @@ export default function Profile() {
             <div>Side Nav
             </div>
             <div>
-                <ProfileDetail/>
+                <ProfileCard/>
             </div>
             <div>
-                Suggestion
+                <UserSuggestion/>
             </div>
         </div>
     </div>

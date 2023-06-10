@@ -1,4 +1,4 @@
-import React, { useRef, useReducer } from "react";
+import React, { useRef, useReducer, useEffect } from "react";
 import Profile from "../../Assets/profile.jpg";
 import Background from "../../Assets/background.jpg"
 import {
@@ -6,11 +6,32 @@ import {
   profileReducer,
 } from "../../Reducer/ProfileReducer";
 
-export default function ProfileDetail() {
+export default function ProfileCard() {
+
+  const getUsers = async () => {
+    try {
+      const user = await fetch("/api/users/", {
+        method: "GET",
+      });
+
+      const response = await user.json();
+      console.log(response);
+      // console.log(await user.json())
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUsers()
+  },[])
+
   const [profileState, profileDispatch] = useReducer(
     profileReducer,
     profilIntialstate
   );
+  const LoggedInUserDetail = JSON.parse(localStorage.getItem("User"));
+  console.log(LoggedInUserDetail)
   const inputImageRef = useRef(null);
   const backgroundInputImageRef = useRef(null);
   const handleImageClick = () => {
@@ -50,7 +71,7 @@ export default function ProfileDetail() {
 
   return (
     <div>
-      <div className="profile-card">
+      <div className="profile-portfolio">
       <div className="background-image-container" onClick={()=> backgroundInputImageRef.current.click()}>
         {profileState.backgroundImage ? (
           <img  className="background-file-upload" src={URL.createObjectURL(profileState.backgroundImage)} alt="profile" />
@@ -80,7 +101,10 @@ export default function ProfileDetail() {
           onChange={handleOnChangeImage}
         />
       </div>
+      
       </div>
+      <p>{LoggedInUserDetail.firstName +" "+LoggedInUserDetail.lastName} </p>
+      <p>{LoggedInUserDetail.username}</p>
     </div>
   );
 }
