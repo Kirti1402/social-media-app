@@ -1,19 +1,14 @@
-import React, { useRef, useReducer, useEffect } from "react";
+import React, { useRef, useReducer, useEffect, useContext } from "react";
 import Profile from "../../Assets/profile.jpg";
 import Background from "../../Assets/background.jpg"
-import {
-  profilIntialstate,
-  profileReducer,
-} from "../../Reducer/ProfileReducer";
+import { UserContext } from "../../Context/allUser";
+
 
 export default function ProfileCard() {
+const {suggestionState,profileState, profileDispatch} = useContext(UserContext);
 
 
 
-  const [profileState, profileDispatch] = useReducer(
-    profileReducer,
-    profilIntialstate
-  );
   const LoggedInUserDetail = JSON.parse(localStorage.getItem("User"));
   console.log(LoggedInUserDetail)
   const inputImageRef = useRef(null);
