@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../HomePage/Header'
 import "./Profile.css"
 import UserSuggestion from '../userSuggestion/UserSuggestion'
-import ProfileCard from './ProfileCard'
+import ProfileTimeLine from './ProfileTimeLine'
 
 export default function Profile() {
   return (
@@ -12,7 +12,7 @@ export default function Profile() {
             <div>Side Nav
             </div>
             <div>
-                <ProfileCard/>
+                <ProfileTimeLine/>
             </div>
             <div>
                 <UserSuggestion/>

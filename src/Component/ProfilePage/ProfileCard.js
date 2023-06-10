@@ -8,23 +8,7 @@ import {
 
 export default function ProfileCard() {
 
-  const getUsers = async () => {
-    try {
-      const user = await fetch("/api/users/", {
-        method: "GET",
-      });
 
-      const response = await user.json();
-      console.log(response);
-      // console.log(await user.json())
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    getUsers()
-  },[])
 
   const [profileState, profileDispatch] = useReducer(
     profileReducer,

@@ -23,6 +23,7 @@ export const users = [
     lastName: "Deo",
     username: "Kittu@0128",
     password: "aspoghmz.",
+    logged:false,
     bookmarks: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
