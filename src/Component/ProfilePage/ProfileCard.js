@@ -5,14 +5,13 @@ import { UserContext } from "../../Context/allUser";
 
 
 export default function ProfileCard() {
-const {suggestionState,profileState, profileDispatch} = useContext(UserContext);
+const {userDetailState,profileState, profileDispatch} = useContext(UserContext);
+  const userDetail = userDetailState.userData;
+  console.log("userDetailState",userDetailState);
 
-
-
-  const LoggedInUserDetail = JSON.parse(localStorage.getItem("User"));
-  console.log(LoggedInUserDetail)
   const inputImageRef = useRef(null);
   const backgroundInputImageRef = useRef(null);
+
   const handleImageClick = () => {
     inputImageRef.current.click();
     
@@ -82,8 +81,10 @@ const {suggestionState,profileState, profileDispatch} = useContext(UserContext);
       </div>
       
       </div>
-      <p>{LoggedInUserDetail.firstName +" "+LoggedInUserDetail.lastName} </p>
-      <p>{LoggedInUserDetail.username}</p>
+          {(userDetail && userDetail.firstName && userDetail.lastName) && <>
+            <p>{userDetail.firstName +" "+userDetail.lastName} </p>
+      <p>{userDetail.username}</p>
+          </>}
     </div>
   );
 }

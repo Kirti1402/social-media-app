@@ -5,7 +5,7 @@ import { profilIntialstate, profileReducer } from "../Reducer/ProfileReducer";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [suggestionState, suggestionDispatch] = useReducer(userReducer, userIntialState);
+  const [userDetailState, userDetailDispatch] = useReducer(userReducer, userIntialState);
   const [profileState, profileDispatch] = useReducer(
     profileReducer,
     profilIntialstate
@@ -17,7 +17,21 @@ export const UserProvider = ({ children }) => {
         method: "GET",
       });
       const response = await user.json();
-      suggestionDispatch({ type: "SET_USERS", payload: response.users });
+      userDetailDispatch({ type: "SET_USERS", payload: response.users });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getUserData = async (id) => {
+    console.log(id)
+    try {
+      const user = await fetch(`/api/users/${id}`, {
+        method: "GET",
+      });
+      const response = await user.json();
+      console.log("Response UserData",response);
+      userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
     } catch (e) {
       console.log(e);
     }
@@ -25,23 +39,16 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     getAllUsers();
+    console.log("useEffect")
+    const loggedInUserDetail =JSON.parse(localStorage.getItem("User"));
+      getUserData(loggedInUserDetail._id);
+   
   }, []);
 
-  const getProfileData = async (id) => {
-    try {
-      const user = await fetch("/api/users/", {
-        method: "GET",
-      });
 
-      const response = await user.json();
-      console.log(response);
-      // console.log(await user.json())
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
 
   return (
-    <UserContext.Provider value={{ suggestionState,profileState, profileDispatch }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ userDetailState,profileState, profileDispatch,getUserData }}>{children}</UserContext.Provider>
   );
 };
