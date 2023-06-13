@@ -8,7 +8,6 @@ export default function Header() {
   const navigate = useNavigate();
   const {userDetailState,getUserData} = useContext(UserContext);
   const profile = userDetailState.users.filter(({logged})=> logged===true)
-  console.log(profile)
 
   return (
     <div>Header

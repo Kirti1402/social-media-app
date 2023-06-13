@@ -7,8 +7,10 @@ import { FollowUnfollowcontext } from "../../Context/FollowUnFollowContext";
 export default function ProfileCard() {
   const { userDetailState, profileState, profileDispatch, userDetailDispatch } =
     useContext(UserContext);
-  const { followHandle, unFollowHandle, followUnfollow, setFollowUnfollow } =
+  const { followHandle, unFollowHandle, followUnfollow, setFollowUnfollow,setUserID,followUnfollowIntialstate } =
     useContext(FollowUnfollowcontext);
+
+    console.log(followUnfollowIntialstate);
 
   const [userDetail, setUserDetail] = useState(() => {
     const storedUserDetail = localStorage.getItem("userDetail");
@@ -59,20 +61,16 @@ export default function ProfileCard() {
     }
   };
 
-  useEffect(() => {
-    const Followers = followers;
-    const Following = following;
-  }, [followUnfollow]);
-
   const handleFollowUnfollow = (_id) => {
     if (followUnfollow.includes(_id)) {
+      setUserID(_id);
       const updatedArray = followUnfollow.filter((id) => id !== _id);
-      setFollowUnfollow(updatedArray);
       unFollowHandle(_id);
-      console.log("unfollow");
+      setFollowUnfollow(updatedArray);
     } else {
-      setFollowUnfollow([...followUnfollow, _id]);
+      setUserID(_id);
       followHandle(_id);
+      setFollowUnfollow([...followUnfollow, _id]);
     }
   };
 

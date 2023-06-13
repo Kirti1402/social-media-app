@@ -26,7 +26,6 @@ export const UserProvider = ({ children }) => {
   };
 
   const getUserData = async (id) => {
-    console.log(id)
     try {
       const user = await fetch(`/api/users/${id}`, {
         method: "GET",

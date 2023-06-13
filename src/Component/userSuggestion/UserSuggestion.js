@@ -21,7 +21,6 @@ const handleProfileClick = (user,index) =>{
       {userDetailState.users.length > 0 &&
        userDetailState.users.map((user,index) => {
         const {_id,id, firstName, lastName, username, logged } = user
-        console.log(followUnfollow)
         if (!logged && !followUnfollow.includes(_id)) {
           return (
             <div key={id}>

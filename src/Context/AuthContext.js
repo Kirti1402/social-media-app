@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }) => {
 
       const response = await user.json();
       console.log(response);
-      // console.log(await user.json())
       if (user.status == 200) {
         localStorage.setItem("EncodedToken", response.encodedToken);
         localStorage.setItem("User", JSON.stringify(response.foundUser));
@@ -71,9 +70,6 @@ export const AuthProvider = ({ children }) => {
       });
 
       const response = await user.json();
-      console.log(response);
-      // console.log(await user.json())
-      console.log(user.status)
       if (user.status == 201) {
         localStorage.setItem("EncodedToken", response.encodedToken);
         localStorage.setItem("User", JSON.stringify(response.createdUser));

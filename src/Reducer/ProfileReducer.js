@@ -5,7 +5,6 @@ export const profilIntialstate = {
 }
 
 export const profileReducer = (state, action) => {
-    console.log(action.payload)
     switch (action.type) {
         case "SET_IMAGE":
             return {...state, image: action.payload}
