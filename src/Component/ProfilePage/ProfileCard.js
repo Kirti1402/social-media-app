@@ -1,13 +1,32 @@
-import React, { useRef, useReducer, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import Profile from "../../Assets/profile.jpg";
 import Background from "../../Assets/background.jpg"
 import { UserContext } from "../../Context/allUser";
+import { FollowUnfollowcontext } from "../../Context/FollowUnFollowContext";
+
 
 
 export default function ProfileCard() {
-const {userDetailState,profileState, profileDispatch} = useContext(UserContext);
-  const userDetail = userDetailState.userData;
-  console.log("userDetailState",userDetailState);
+const {userDetailState,profileState, profileDispatch,userDetailDispatch} = useContext(UserContext);
+const {followHandle} = useContext(FollowUnfollowcontext)
+
+  const [followUnfollow,setFollowUnfollow] = useState(true)
+  const [userDetail, setUserDetail] = useState(() => {
+    const storedUserDetail = localStorage.getItem('userDetail');
+    return storedUserDetail ? JSON.parse(storedUserDetail) : null;
+  });
+
+  useEffect(() => {
+    if (userDetail) {
+      localStorage.setItem('userDetail', JSON.stringify(userDetail));
+    }
+  }, [userDetail]);
+
+  const user = JSON.parse(localStorage.getItem("User"));
+
+  
+  const detail = JSON.parse(localStorage.getItem("userDetail"));
+  const {_id,firstName,lastName,username,followers,following} = detail
 
   const inputImageRef = useRef(null);
   const backgroundInputImageRef = useRef(null);
@@ -32,7 +51,6 @@ const {userDetailState,profileState, profileDispatch} = useContext(UserContext);
         console.log("Invalid file type. Please select an image.");
       }
     }else{
-      console.log("else")
       if (file && file.type.includes("image")) {
         profileDispatch({ type: "SET_BACKGROUND_IMAGE", payload: file });
       } else {
@@ -46,6 +64,24 @@ const {userDetailState,profileState, profileDispatch} = useContext(UserContext);
     }
    
   };
+
+
+
+useEffect(()=>{
+  const Followers = followers;
+const Following = following
+},[userDetailState])
+
+const handleFollowUnfollow = (id) =>{
+  if(followUnfollow){
+    followHandle(id);
+    setFollowUnfollow(!followUnfollow)
+  }else{
+    setFollowUnfollow(!followUnfollow)
+  }
+
+
+}
 
   return (
     <div>
@@ -81,9 +117,13 @@ const {userDetailState,profileState, profileDispatch} = useContext(UserContext);
       </div>
       
       </div>
-          {(userDetail && userDetail.firstName && userDetail.lastName) && <>
-            <p>{userDetail.firstName +" "+userDetail.lastName} </p>
-      <p>{userDetail.username}</p>
+          {(detail && firstName && lastName) && <>
+            <p>{firstName +" "+lastName} </p>
+      <p>{username}</p>
+      <p>Followers : {followers.length}</p>
+      <p>Following : {following.length}</p>
+      
+      {(user.firstName === firstName) ? <button>Log Out</button> :<button onClick={()=>handleFollowUnfollow(_id)}>{followUnfollow ? 'Follow' : 'UnFollow'}</button>}
           </>}
     </div>
   );

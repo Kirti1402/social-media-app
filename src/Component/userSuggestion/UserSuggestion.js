@@ -1,6 +1,6 @@
 import React, { useContext} from "react";
 import { UserContext } from "../../Context/allUser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 export default function UserSuggestion() {
   const navigate = useNavigate();
@@ -18,9 +18,12 @@ const handleProfileClick = (id) =>{
           if (!logged) {
             return (
               <div key={id}>
-                <div onClick={()=>handleProfileClick(_id)}>pic</div>
+                <div>
+                <Link to={`/profile/${username}`} onClick={()=>getUserData(_id)} >Pic</Link>
+                </div>
                 <h3>{firstName + " " + lastName}</h3>
                 <p>{username}</p>
+                <button>Follow</button>
               </div>
             );
           }

@@ -1,6 +1,6 @@
 import React,{useContext} from 'react'
 import { UserContext } from '../../Context/allUser';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,Link} from 'react-router-dom';
 
 
 
@@ -17,9 +17,10 @@ export default function Header() {
   }
   return (
     <div>Header
-      {profile.length>=0 && profile.map(({_id,id,firstName,lastName,username})=>{
+      {profile.length>0 && profile.map(({_id,id,firstName,lastName,username})=>{
         return<>
-        <div  onClick={()=>handleProfileClick(_id)}>pic</div>
+        {/* <div  onClick={()=>handleProfileClick(_id)}>pic</div> */}
+        <Link to={`/profile/${username}`} onClick={()=>getUserData(_id)} >Pic</Link>
         <p>
           {firstName + " " + lastName + " " + username}</p></> 
       })

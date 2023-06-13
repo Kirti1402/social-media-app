@@ -25,10 +25,10 @@ function App() {
         />
 
         <Route
-          path="/profile"
+          path="/profile/:username"
           element={
             <ProtectedRoutes>
-              <Profile />
+              <Profile  />
             </ProtectedRoutes>
           }
         />

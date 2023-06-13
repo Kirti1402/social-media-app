@@ -6,6 +6,7 @@ import { makeServer } from "./server";
 import { AuthProvider } from "./Context/AuthContext";
 import {BrowserRouter as Router} from "react-router-dom"
 import { UserProvider } from "./Context/allUser";
+import { FollowUnfollowProvider } from "./Context/FollowUnFollowContext";
 // Call make Server
 makeServer();
 
@@ -15,7 +16,9 @@ root.render(
     <Router>
     <AuthProvider>
       <UserProvider>
+      <FollowUnfollowProvider> 
       <App />
+      </FollowUnfollowProvider> 
       </UserProvider>
     </AuthProvider>
     </Router>

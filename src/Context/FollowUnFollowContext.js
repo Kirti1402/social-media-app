@@ -1,0 +1,28 @@
+import { createContext, useContext } from "react";
+import { UserContext } from "./allUser";
+
+
+export const FollowUnfollowcontext = createContext()
+
+export const FollowUnfollowProvider = ({children}) =>{
+    const {userDetailDispatch} = useContext(UserContext);
+    
+    const followHandle = async (userID) => {
+        const token = localStorage.getItem("EncodedToken");
+        try {
+          const user = await fetch(`/api/users/follow/${userID}`, {
+            method: "POST",
+            headers: {
+              authorization: `${token}`,
+            },
+          });
+          const response = await user.json();
+          console.log("Response",response,user);
+          userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
+        } catch (e) {
+          console.log(e);
+        }
+      };
+    return <FollowUnfollowcontext.Provider value={{followHandle}}>{children}
+    </FollowUnfollowcontext.Provider>
+}
