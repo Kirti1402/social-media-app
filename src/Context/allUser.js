@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
       });
       const response = await user.json();
       userDetailDispatch({ type: "SET_USERS", payload: response.users });
-      setLoggedIn(true)
+      
     } catch (e) {
       console.log(e);
     }
@@ -35,41 +35,15 @@ export const UserProvider = ({ children }) => {
       console.log("Response UserData",response);
       localStorage.setItem('userDetail', JSON.stringify(response.user));
       userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
-
+      setLoggedIn(true)
     } catch (e) {
       console.log(e);
     }
   };
 
-  // const followHandle = async (userID) => {
-  //   console.log(userID)
-    
-  //   const token = localStorage.getItem("EncodedToken");
-  //   console.log(token)
-  //   console.log(`/api/users/follow/${userID}`)
-  //   try {
-  //     const user = await fetch(`/api/users/follow/${userID}`, {
-  //       method: "POST",
-  //       headers: {
-  //         authorization: `${token}`,
-  //       },
-  //     });
-  //     const response = await user.json();
-  //     console.log("Response",response);
-  //     userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   useEffect(() => {
     getAllUsers();
-  }, []);
-
-
-
-
-
+  }, [loggedIn]);
 
   return (
     <UserContext.Provider value={{ userDetailState,profileState, profileDispatch,getUserData,userDetailDispatch }}>{children}</UserContext.Provider>

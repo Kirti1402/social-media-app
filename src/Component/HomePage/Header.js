@@ -10,11 +10,6 @@ export default function Header() {
   const profile = userDetailState.users.filter(({logged})=> logged===true)
   console.log(profile)
 
-  const handleProfileClick = (id) =>{
-    getUserData(id);
-    navigate("/profile")
-
-  }
   return (
     <div>Header
       {profile.length>0 && profile.map(({_id,id,firstName,lastName,username})=>{
