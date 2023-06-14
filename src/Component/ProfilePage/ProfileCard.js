@@ -7,26 +7,21 @@ import { FollowUnfollowcontext } from "../../Context/FollowUnFollowContext";
 export default function ProfileCard() {
   const { userDetailState, profileState, profileDispatch, userDetailDispatch } =
     useContext(UserContext);
-  const { followHandle, unFollowHandle, followUnfollow, setFollowUnfollow,setUserID,followUnfollowIntialstate } =
-    useContext(FollowUnfollowcontext);
+  const {
+    followHandle,
+    unFollowHandle,
+    followUnfollow,
+    setFollowUnfollow,
+    followUnfollowIntialstate,
+  } = useContext(FollowUnfollowcontext);
 
-    console.log(followUnfollowIntialstate);
+  const loggingUserDetail = JSON.parse(localStorage.getItem("User"));
+  const userDetail = JSON.parse(localStorage.getItem("userDetail"));
 
-  const [userDetail, setUserDetail] = useState(() => {
-    const storedUserDetail = localStorage.getItem("userDetail");
-    return storedUserDetail ? JSON.parse(storedUserDetail) : null;
-  });
+  const detail = userDetail;
 
-  useEffect(() => {
-    if (userDetail) {
-      localStorage.setItem("userDetail", JSON.stringify(userDetail));
-    }
-  }, [userDetail]);
-
-  const user = JSON.parse(localStorage.getItem("User"));
-
-  const detail = JSON.parse(localStorage.getItem("userDetail"));
-  const { _id, firstName, lastName, username, followers, following } = detail;
+  const { _id, firstName, lastName, username, followers, following, logged } =
+    detail;
 
   const inputImageRef = useRef(null);
   const backgroundInputImageRef = useRef(null);
@@ -63,12 +58,10 @@ export default function ProfileCard() {
 
   const handleFollowUnfollow = (_id) => {
     if (followUnfollow.includes(_id)) {
-      setUserID(_id);
       const updatedArray = followUnfollow.filter((id) => id !== _id);
       unFollowHandle(_id);
       setFollowUnfollow(updatedArray);
     } else {
-      setUserID(_id);
       followHandle(_id);
       setFollowUnfollow([...followUnfollow, _id]);
     }
@@ -118,14 +111,15 @@ export default function ProfileCard() {
           />
         </div>
       </div>
+
       {detail && firstName && lastName && (
         <>
           <p>{firstName + " " + lastName} </p>
           <p>{username}</p>
-          <p>Followers : {followers.length}</p>
+          <p>Followers :{followers.length}</p>
           <p>Following : {following.length}</p>
 
-          {user.firstName === firstName ? (
+          {logged ? (
             <button>Log Out</button>
           ) : (
             <button onClick={() => handleFollowUnfollow(_id)}>

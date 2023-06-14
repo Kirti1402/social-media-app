@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
       });
 
       const response = await user.json();
-      console.log(response);
       if (user.status == 200) {
         localStorage.setItem("EncodedToken", response.encodedToken);
         localStorage.setItem("User", JSON.stringify(response.foundUser));
@@ -86,6 +85,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  console.log(authState);
+
   return (
     <authContext.Provider
       value={{
@@ -94,7 +95,8 @@ export const AuthProvider = ({ children }) => {
         authDispatch,
         isLoggedIn,
         login,
-        signUp
+        signUp,
+        userDataState
       }}
     >
       {children}

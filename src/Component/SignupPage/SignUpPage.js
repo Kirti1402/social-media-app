@@ -12,7 +12,6 @@ function SignUpPage() {
 
   const { authState, authDispatch, setIsLoggedIn,signUp } = useContext(authContext);
   const onClickHandleSignUp = () => {
-    console.log(authState)
     if (
       authState.username &&
       authState.password &&

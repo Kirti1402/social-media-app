@@ -1,7 +1,6 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useReducer,
   useState,
 } from "react";
@@ -20,7 +19,7 @@ export const FollowUnfollowProvider = ({ children }) => {
     followUnfollowUserReducer,
     followUnfollowIntialState
   );
-  const { userDetailDispatch } = useContext(UserContext);
+  const {userDetailDispatch,userDetailState,loggedIn,setLoggedIn} = useContext(UserContext);
 
   const followHandle = async (userID) => {
     const token = localStorage.getItem("EncodedToken");
@@ -32,7 +31,6 @@ export const FollowUnfollowProvider = ({ children }) => {
         },
       });
       const response = await user.json();
-      console.log("Response", response, user);
       followUnFollowDispatch({
         type: "SET_USER_FOLLOWING",
         payload: response.user,
@@ -41,7 +39,18 @@ export const FollowUnfollowProvider = ({ children }) => {
         type: "SET_FOLLOWED_USER",
         payload: response.followUser,
       });
-      userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
+      console.log( response.followUser)
+      const userDetail = JSON.parse(localStorage.getItem("userDetail"))
+      const loggedInUser = JSON.parse(localStorage.getItem("User"))
+      console.log(userID,userDetail,loggedInUser)
+      if(userID === userDetail._id && userID !== loggedInUser._id ){
+        console.log("userIdmatched")
+        localStorage.setItem("userDetail",JSON.stringify(response.followUser))
+      }
+      
+      localStorage.setItem("User",JSON.stringify(response.user))
+      setLoggedIn(!loggedIn)
+      // userDetailDispatch({ type: "SET_USER_DATA", payload: response.followUser });
     } catch (e) {
       console.log(e);
     }
@@ -57,17 +66,53 @@ export const FollowUnfollowProvider = ({ children }) => {
         },
       });
       const response = await user.json();
-      console.log("unfollowResponse", response, user);
-      
-      userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
+      followUnFollowDispatch({
+        type: "SET_USER_FOLLOWING",
+        payload: response.user,
+      });
+      followUnFollowDispatch({
+        type: "SET_FOLLOWED_USER",
+        payload: response.followUser,
+      });
+
+      localStorage.setItem("User",JSON.stringify(response.user))
+      // localStorage.setItem("UserProfileDetail",response.followUser)
+      userUpdate( response.user)
+
+      // userDetailDispatch({ type: "SET_USER_DATA", payload: response.followUser });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const userUpdate = async (data) => {
+    const token = localStorage.getItem("EncodedToken");
+    try {
+      const user = await fetch(`/api/users/edit`, {
+        method: "POST",
+        headers: {
+          authorization: `${token}`,
+        },
+        body: JSON.stringify(data)
+      });
+      const response = await user.json();
+
+      let updatedArray = userDetailState.users.map(item =>{
+        if(item._id === response.user._id) {
+          return {...item,...response.user}
+        }
+        return item;
+            })
+
+      userDetailDispatch({ type: "SET_USERS", payload: updatedArray });
+      // localStorage.setItem("UserProfileDetail",response.followUser)
+      // userDetailDispatch({ type: "SET_USER_DATA", payload: response.followUser });
     } catch (e) {
       console.log(e);
     }
   };
 
-  //   useEffect(() => {
-  //     followHandle(userID)
-  //   },[userID])
+
+
   return (
     <FollowUnfollowcontext.Provider
       value={{
