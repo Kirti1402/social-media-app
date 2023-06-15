@@ -1,27 +1,63 @@
 
 .post-Card{
+    position: relative;
     display: flex;
     flex-direction: column;
     border: 2px solid black;
-    margin-bottom: 1rem;
+    margin: 2rem 4rem;
     padding: 0.5rem;  
     border-radius: 0.5rem;  
 }
 
-/* .post-content{
-    align-self:  center;
-} */
 .post-btns-container{
     display: flex;
     
 }
 
 .post-btns-container >*{
-    margin:10px
+    margin-right:1rem
 }
 
 .media{
     border-radius: 0.5rem;
     width: 100%;
     height: 150px;
+  }
+
+  .post-user-detail{
+    display: flex;
+  }
+  .post-user-detail > *{
+    margin: 0.5rem;
+  }
+
+
+  .post-profile-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 2px solid black;
+  }
+
+  .post-card-menu{
+    position: absolute;
+    right: 0;
+    margin-right: 0.5rem ;
+  }
+
+  .showBtn{
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-weight: 400;
+
+  }
+
+  .options{
+    background: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    padding: 0.2rem;
+    outline: none;
+    border-radius: 0.2rem;
   }

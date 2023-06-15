@@ -39,16 +39,20 @@ export const FollowUnfollowProvider = ({ children }) => {
         type: "SET_FOLLOWED_USER",
         payload: response.followUser,
       });
-      console.log( response.followUser)
+      console.log( "responsehandleuser",response)
       const userDetail = JSON.parse(localStorage.getItem("userDetail"))
       const loggedInUser = JSON.parse(localStorage.getItem("User"))
-      console.log(userID,userDetail,loggedInUser)
+      console.log("userIdPassed",userID,"userDetailonPage",userDetail,"LoggedInUserDetail",loggedInUser)
       if(userID === userDetail._id && userID !== loggedInUser._id ){
         console.log("userIdmatched")
         userDetailDispatch({ type: "SET_USER_DATA", payload: response.followUser })
       }else if(userID !== loggedInUser._id && userDetail._id === loggedInUser._id){
+
         userDetailDispatch({ type: "SET_USER_DATA", payload: response.user })
+        
       }
+
+      userUpdate( response.user)
       
       
       setLoggedIn(!loggedIn)
@@ -111,7 +115,8 @@ export const FollowUnfollowProvider = ({ children }) => {
         }
         return item;
             })
-
+      console.log("updated",response)
+      localStorage.setItem("User",JSON.stringify(response.user));
       userDetailDispatch({ type: "SET_USERS", payload: updatedArray });
       // localStorage.setItem("UserProfileDetail",response.followUser)
       // userDetailDispatch({ type: "SET_USER_DATA", payload: response.followUser });

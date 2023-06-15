@@ -7,10 +7,14 @@ export default function HomePage() {
     
   return <div>
     <Header/>
-    <Link to='/profile'>Profile</Link>
-
-    <div>
-      <UserSuggestion/>
-    </div>
+    <div className='page-container'>
+            <div>Side Nav
+            </div>
+            <div>
+            </div>
+            <div>
+                <UserSuggestion/>
+            </div>
+        </div>
   </div>;
 }

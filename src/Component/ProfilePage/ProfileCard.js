@@ -5,10 +5,15 @@ import { UserContext } from "../../Context/allUser";
 import { FollowUnfollowcontext } from "../../Context/FollowUnFollowContext";
 
 export default function ProfileCard() {
+  const [showFollowers, setShowFollowers] = useState(false);
 
-
-  const { userDetailState, profileState, profileDispatch, userDetailDispatch,getUserData } =
-    useContext(UserContext);
+  const {
+    userDetailState,
+    profileState,
+    profileDispatch,
+    userDetailDispatch,
+    getUserData,
+  } = useContext(UserContext);
   const {
     followHandle,
     unFollowHandle,
@@ -22,10 +27,20 @@ export default function ProfileCard() {
 
   const detail = userDetailState.userData;
 
-  const { _id, firstName, lastName, username, followers, following, logged ,avatar,bio,backgroundImage} =
-    detail;
+  const {
+    _id,
+    firstName,
+    lastName,
+    username,
+    followers,
+    following,
+    logged,
+    avatar,
+    bio,
+    backgroundImage,
+  } = detail;
 
-    console.log(detail)
+  console.log(detail);
 
   const handleFollowUnfollow = (_id) => {
     if (followUnfollow.includes(_id)) {
@@ -40,23 +55,44 @@ export default function ProfileCard() {
 
   return (
     <div>
-
       {detail && firstName && lastName && (
         <>
-        <p><img className="background-image" src={backgroundImage}/></p>
-          <p><img className="profile-image" src={avatar}/></p>
-          <p>{firstName + " " + lastName} </p>
-          <p>{username}</p>
-          <p>Followers :{followers.length}</p>
-          <p>Following : {following.length}</p>
-
-          {logged ? (
-            <button>Log Out</button>
-          ) : (
-            <button onClick={() => handleFollowUnfollow(_id)}>
-              {followUnfollow.includes(_id) ? "UnFollow" : "Follow"}
-            </button>
-          )}
+          <div className="avatar-user-detail">
+            <img className="background-image" src={backgroundImage} />
+            <div className="user-desc">
+              <img className="profile-image" src={avatar} />
+              <div className="username-desc">
+                <p>{firstName + " " + lastName} </p>
+                <p>{username}</p>
+              </div>
+            </div>
+          </div>
+          <div className="followers-following">
+            <div className="follower-btn">
+              <button onClick={() => setShowFollowers(!showFollowers)}>
+                Followers :{followers.length}
+              </button>
+              {showFollowers && (
+                <div className="followers-pop-up">
+                  {followers.length > 0
+                    ? followers.map(({ username }) => username)
+                    : "0 followers"}
+                </div>
+              )}
+            </div>
+            <div>
+              <p>Following : {following.length}</p>
+            </div>
+          </div>
+          <div>
+            {logged ? (
+              <button>Log Out</button>
+            ) : (
+              <button onClick={() => handleFollowUnfollow(_id)}>
+                {followUnfollow.includes(_id) ? "UnFollow" : "Follow"}
+              </button>
+            )}
+          </div>
         </>
       )}
     </div>

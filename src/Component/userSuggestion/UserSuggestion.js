@@ -28,12 +28,12 @@ const handleAvatarClick = (id,username) =>{
       ProfileSuggestion
       {userDetailState.users.length > 0 &&
        userDetailState.users.map((user,index) => {
-        const {_id,id, firstName, lastName, username, logged } = user
+        const {_id,id, firstName, lastName, username, logged,avatar } = user
         if (!logged && !followUnfollow.includes(_id)) {
           return (
             <div key={id}>
               <div>
-              <Link to={`/profile/${username}`} onClick={()=>handleAvatarClick(_id,username)} >Pic</Link>
+              <Link to={`/profile/${username}`} onClick={()=>handleAvatarClick(_id,username)} ><img className="profile-image"  src={avatar}/></Link>
               </div>
               <h3>{firstName + " " + lastName}</h3>
               <p>{username}</p>

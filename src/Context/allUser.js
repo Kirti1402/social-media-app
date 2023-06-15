@@ -19,6 +19,8 @@ export const UserProvider = ({ children }) => {
         method: "GET",
       });
       const response = await user.json();
+      localStorage.setItem("AllUser",JSON.stringify(response.users) );
+      console.log("allUser",response)
       userDetailDispatch({ type: "SET_USERS", payload: response.users });
       
     } catch (e) {
@@ -26,8 +28,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-
-  const getUserData = async (id) => {
+  const setUserDataRespectivePage = async (id) => {
     try {
       const user = await fetch(`/api/users/${id}`, {
         method: "GET",
@@ -39,11 +40,22 @@ export const UserProvider = ({ children }) => {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  const getUserData =  (id) => {
+    const loggedInUser = JSON.parse(localStorage.getItem("User"));
+    if(id === loggedInUser._id){
+      localStorage.setItem('userDetail', JSON.stringify(loggedInUser));
+      userDetailDispatch({ type: "SET_USER_DATA", payload: loggedInUser });
+    }else{
+      setUserDataRespectivePage(id);
+    }
+   
   };
 
   useEffect(() => {
     getAllUsers();
-  }, [loggedIn]);
+  }, [ ]);
 
   return (
     <UserContext.Provider value={{ userDetailState,getUserData,profileState, profileDispatch,userDetailDispatch,userId,setUserId,loggedIn,setLoggedIn }}>{children}</UserContext.Provider>

@@ -96,7 +96,8 @@ export const AuthProvider = ({ children }) => {
         isLoggedIn,
         login,
         signUp,
-        userDataState
+        userDataState,
+        userDataDispatch
       }}
     >
       {children}
