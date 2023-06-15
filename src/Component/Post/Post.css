@@ -3,10 +3,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
-    margin: 2rem 4rem;
+    /* border: 2px solid black; */
+    margin: 2rem 3rem;
     padding: 0.5rem;  
     border-radius: 0.5rem;  
+    box-shadow: 0 0 5px 2px lightgray;
 }
 
 .post-btns-container{

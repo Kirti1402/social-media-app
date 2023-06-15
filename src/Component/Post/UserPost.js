@@ -18,7 +18,6 @@ export default function UserPost() {
   console.log(postState)
   return (
     <>
-    <div>UserPost</div>
     {postState.post.map(posts =>{
       const {content,likes:{likeCount},comment,media} = posts
       return <div className='post-Card'>

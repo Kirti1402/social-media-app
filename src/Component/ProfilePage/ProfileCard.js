@@ -1,11 +1,12 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import Profile from "../../Assets/profile.jpg";
-import Background from "../../Assets/background.jpg";
 import { UserContext } from "../../Context/allUser";
 import { FollowUnfollowcontext } from "../../Context/FollowUnFollowContext";
+import { PostContext } from "../../Context/PostContext";
+import { Link } from "react-router-dom";
 
 export default function ProfileCard() {
   const [showFollowers, setShowFollowers] = useState(false);
+  const [showFollowing, setShowFollowing] = useState(false);
 
   const {
     userDetailState,
@@ -21,6 +22,7 @@ export default function ProfileCard() {
     setFollowUnfollow,
     followUnfollowIntialstate,
   } = useContext(FollowUnfollowcontext);
+  const {getUserPost} = useContext(PostContext);
 
   const loggingUserDetail = JSON.parse(localStorage.getItem("User"));
   const userDetail = JSON.parse(localStorage.getItem("userDetail"));
@@ -53,6 +55,11 @@ export default function ProfileCard() {
     }
   };
 
+  const handleAvatarClick = (id,username) =>{
+    getUserData(id)
+    getUserPost(username);
+  }
+
   return (
     <div>
       {detail && firstName && lastName && (
@@ -62,7 +69,7 @@ export default function ProfileCard() {
             <div className="user-desc">
               <img className="profile-image" src={avatar} />
               <div className="username-desc">
-                <p>{firstName + " " + lastName} </p>
+                <p style={{fontWeight:'700',fontSize:'18px'}}>{firstName + " " + lastName} </p>
                 <p>{username}</p>
               </div>
             </div>
@@ -75,16 +82,25 @@ export default function ProfileCard() {
               {showFollowers && (
                 <div className="followers-pop-up">
                   {followers.length > 0
-                    ? followers.map(({ username }) => username)
+                    ? followers.map(({ _id,username }) => <Link className="link-user-display" to={`/profile/${username}`} onClick={()=>handleAvatarClick(_id,username)} >{username}</Link>)
                     : "0 followers"}
                 </div>
               )}
             </div>
-            <div>
-              <p>Following : {following.length}</p>
+            <div className="follower-btn">
+              <button onClick={() => setShowFollowing(!showFollowing)}>
+                Following :{following.length}
+              </button>
+              {showFollowing && (
+                <div className="followers-pop-up">
+                  {following.length > 0
+                    ? following.map(({ _id,username }) => <Link className="link-user-display" to={`/profile/${username}`} onClick={()=>handleAvatarClick(_id,username)} >{username}</Link>)
+                    : "0 following"}
+                </div>
+              )}
             </div>
           </div>
-          <div>
+          <div className="action-btn">
             {logged ? (
               <button>Log Out</button>
             ) : (
