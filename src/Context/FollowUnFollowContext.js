@@ -46,7 +46,7 @@ export const FollowUnfollowProvider = ({ children }) => {
       if(userID === userDetail._id && userID !== loggedInUser._id ){
         console.log("userIdmatched")
         userDetailDispatch({ type: "SET_USER_DATA", payload: response.followUser })
-      }else if(userID !== userDetail._id && userID !== loggedInUser._id){
+      }else if(userID !== loggedInUser._id && userDetail._id === loggedInUser._id){
         userDetailDispatch({ type: "SET_USER_DATA", payload: response.user })
       }
       
