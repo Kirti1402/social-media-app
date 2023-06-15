@@ -5,7 +5,9 @@ import { UserContext } from "../../Context/allUser";
 import { FollowUnfollowcontext } from "../../Context/FollowUnFollowContext";
 
 export default function ProfileCard() {
-  const { userDetailState, profileState, profileDispatch, userDetailDispatch } =
+
+
+  const { userDetailState, profileState, profileDispatch, userDetailDispatch,getUserData } =
     useContext(UserContext);
   const {
     followHandle,
@@ -18,7 +20,7 @@ export default function ProfileCard() {
   const loggingUserDetail = JSON.parse(localStorage.getItem("User"));
   const userDetail = JSON.parse(localStorage.getItem("userDetail"));
 
-  const detail = userDetail;
+  const detail = userDetailState.userData;
 
   const { _id, firstName, lastName, username, followers, following, logged } =
     detail;
