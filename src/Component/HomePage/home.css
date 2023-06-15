@@ -1,0 +1,18 @@
+.home-conatiner{
+    width: 100%;
+    background-color:thistle;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 1;
+}
+
+.home-heading{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  font-weight: 900;
+  font-size: 30px;
+  color:black;
+}

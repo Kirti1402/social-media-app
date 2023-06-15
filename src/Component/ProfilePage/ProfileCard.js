@@ -82,7 +82,7 @@ export default function ProfileCard() {
               {showFollowers && (
                 <div className="followers-pop-up">
                   {followers.length > 0
-                    ? followers.map(({ _id,username }) => <Link className="link-user-display" to={`/profile/${username}`} onClick={()=>handleAvatarClick(_id,username)} >{username}</Link>)
+                    ? followers.map(({ _id,username }) => <Link className="link-user-display" to={`/profile/${username}`} onClick={()=>handleAvatarClick(_id,username,avatar)} >{username}</Link>)
                     : "0 followers"}
                 </div>
               )}

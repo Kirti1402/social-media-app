@@ -1,0 +1,17 @@
+.sideNavigation-container{
+    margin-top:5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sideNavigation-container>*{
+    margin: 1rem;
+}
+
+.link{
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+
+}

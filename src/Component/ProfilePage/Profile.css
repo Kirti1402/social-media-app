@@ -129,3 +129,12 @@
   text-decoration: none;
   color: black;
 }
+
+.link-user-display:hover{
+  color: darkseagreen;
+  font-weight: 700;
+}
+
+.profile-timeline{
+  margin: 4rem;
+}

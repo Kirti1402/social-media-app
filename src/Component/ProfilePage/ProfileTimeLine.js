@@ -4,7 +4,7 @@ import UserPost from '../Post/UserPost'
 
 export default function ProfileTimeLine() {
   return (
-    <div> <ProfileCard/>
+    <div className='profile-timeline'> <ProfileCard/>
     <UserPost/>
     </div>
   )

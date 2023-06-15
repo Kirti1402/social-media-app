@@ -7,6 +7,9 @@ import HomePage from "./Component/HomePage/HomePage";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 import SignUpPage from "./Component/SignupPage/SignUpPage";
 import Profile from "./Component/ProfilePage/Profile";
+import TrendingPost from "./Component/TrendingPost/TrendingPost";
+import LikedPost from "./Component/LikedPost/LikedPost";
+import BookMarked from "./Component/BookMarked/BookMarked";
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/trendingPost" element={<TrendingPost />} />
+        <Route path="/likedPost" element={<LikedPost />} />
+        <Route path="/bookmarkedPost" element={<BookMarked />} />
         <Route
           path="/"
           element={
