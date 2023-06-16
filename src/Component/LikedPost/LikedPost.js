@@ -1,12 +1,11 @@
 import React, { useContext,useState } from 'react'
 import { PostContext } from '../../Context/PostContext'
-import Loader from '../Loader/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function LikedPost() {
-    const { postState,setLikesPostID, likedPostID,likedDislikePostHandle} = useContext(PostContext);
+    const { postState, likedPostID,likedDislikePostHandle} = useContext(PostContext);
     const allpost = postState.allPost;
     console.log(allpost)
     const likedPost = allpost && allpost.filter((post)=>{
@@ -88,7 +87,7 @@ console.log(likedPost)
           </div>
         );
       })
-     :<p>You didnt liked any post</p>}
+     :<p className='nolikedpost-text'>You didnt liked any post</p>}
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect ,useState} from "react";
 import { postIntialState,postUserReducer } from "../Reducer/PostReducer";
+import { toast } from "react-toastify";
 
 export const PostContext = createContext();
 
@@ -65,10 +66,16 @@ export const PostProvider = ({ children }) => {
         if (!likedPostID.includes(post._id)){
           postLikeHandler(post._id);
           setLikesPostID([...likedPostID,post._id]);
+          toast.success(`You liked post of ${post.username}`, {
+            autoClose: 1000,
+          });
         } else {
           const updatedArray = likedPostID.filter((id) => id !== post._id);
           setLikesPostID(updatedArray);
           postDisLikeHandler(post._id)
+          toast.success(`You disliked post of ${post.username}`, {
+            autoClose: 1000,
+          });
         }
       }
   useEffect(()=>{
