@@ -1,11 +1,13 @@
 import React, { useContext ,useState} from 'react'
 import { PostContext } from '../../Context/PostContext'
 import { UserContext } from '../../Context/allUser'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import "./Post.css"
 
 
 export default function UserPost() {
-  const  {postState} = useContext(PostContext)
+  const  {postState,likedPostID,setLikesPostID} = useContext(PostContext)
   const { userDetailState } =
   useContext(UserContext);
   const detail = userDetailState.userData;
@@ -16,10 +18,21 @@ export default function UserPost() {
     setShowOptions(!showOptions);
   };
   console.log(postState)
+  const likedPost = (post,index) =>{
+    if (!likedPostID.includes(post._id)){
+      setLikesPostID([...likedPostID,post._id]);
+    } else {
+      const updatedList = likedPostID
+      updatedList.splice(index,1);
+      setLikesPostID([updatedList])
+    }
+  }
+
+  console.log(likedPostID)
   return (
     <>
-    {postState.post.map(posts =>{
-      const {content,likes:{likeCount},comment,media} = posts
+    {postState.post.map((post,index) =>{
+      const {_id,content,likes:{likeCount},comment,media} = post
       return <div className='post-Card'>
         <div className='post-user-detail'>
           <div><img className="post-profile-image" src={detail.avatar}/></div>
@@ -34,7 +47,7 @@ export default function UserPost() {
         <p>{content}</p>
         </div>
         <div className='post-btns-container'>
-          <p><button>like</button>{likeCount}</p>
+          <p><button onClick={() => likedPost(post,index)} className='like-btn'>{likedPostID.includes(_id)?<FontAwesomeIcon icon={faHeart} style={{ color: '#F38181' }} />:<FontAwesomeIcon icon={faHeart}/> }</button>{likeCount}</p>
         <p><button>Comment</button>:{comment.length}</p>
         <p><button>BookMark</button></p>
         </div>

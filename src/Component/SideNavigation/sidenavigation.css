@@ -13,5 +13,15 @@
     text-decoration: none;
     color: black;
     font-weight: 600;
+}
 
+.link:hover{
+    padding: 0.3rem;
+    text-align: center;
+    width: 7rem;
+    transform: scale(1.5);
+    box-shadow: 0 0 5px 1px lightgray;
+    border-radius: 0.3rem;
+    color: cornflowerblue;
+    background-color: beige;
 }

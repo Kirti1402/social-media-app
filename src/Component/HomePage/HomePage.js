@@ -3,6 +3,7 @@ import UserSuggestion from "../userSuggestion/UserSuggestion";
 import Header from "./Header";
 import "./home.css";
 import SideNavigation from "../SideNavigation/SideNavigation";
+import HomeAllPost from "../Post/HomeAllPost";
 
 export default function HomePage() {
   return (
@@ -12,7 +13,7 @@ export default function HomePage() {
         <div>
           <SideNavigation />
         </div>
-        <div>Home</div>
+        <div className="home-page"><HomeAllPost/></div>
         <div>
           <UserSuggestion />
         </div>

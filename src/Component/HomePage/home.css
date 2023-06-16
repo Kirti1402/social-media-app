@@ -1,6 +1,6 @@
 .home-conatiner{
     width: 100%;
-    background-color:thistle;
+    background-color:#C8DAD3;
     display: flex;
     justify-content: space-between;
     position: fixed;
@@ -15,4 +15,8 @@
   font-weight: 900;
   font-size: 30px;
   color:black;
+}
+
+.home-page{
+  margin-top:5rem;
 }

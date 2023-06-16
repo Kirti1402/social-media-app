@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../HomePage/Header'
 import SideNavigation from '../SideNavigation/SideNavigation'
 import UserSuggestion from '../userSuggestion/UserSuggestion'
+import "./bookmarkedpost.css"
 
 export default function BookMarked() {
   return (
@@ -11,7 +12,7 @@ export default function BookMarked() {
         <div>
           <SideNavigation />
         </div>
-        <div>bookmarkedPost</div>
+        <div div className='bookmarked-page'>bookmarkedPost</div>
         <div>
           <UserSuggestion />
         </div>

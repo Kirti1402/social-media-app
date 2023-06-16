@@ -2,7 +2,7 @@ import React from 'react'
 import SideNavigation from '../SideNavigation/SideNavigation'
 import UserSuggestion from '../userSuggestion/UserSuggestion'
 import Header from '../HomePage/Header'
-
+import "./likedpost.css"
 export default function LikedPost() {
   return (
     <div>
@@ -11,7 +11,7 @@ export default function LikedPost() {
         <div>
           <SideNavigation />
         </div>
-        <div>Liked</div>
+        <div className='liked-paged'>Liked</div>
         <div>
           <UserSuggestion />
         </div>
