@@ -13,6 +13,16 @@ export default function UserPost() {
   const detail = userDetailState.userData;
 
   console.log("postState",postState)
+
+  const sortedDataDate = postState.post.length >0 && postState.post.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const userPostData =sortedDataDate.length>0 && sortedDataDate.map(obj => {
+    const date = new Date(obj.createdAt);
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    
+    return { ...obj, createdAt: formattedDate };
+  });
+  console.log("SortedData",sortedDataDate);
   const [showOptions, setShowOptions] = useState(false);
 
   const handleClick = () => {
@@ -36,11 +46,11 @@ export default function UserPost() {
   console.log(likedPostID)
   return (
     <>
-    {postState.post.map((post,index) =>{
-      const {_id,content,likes:{likeCount},comment,media} = post
-      return <div className='post-Card'>
+    {userPostData.length>0 && userPostData.map((post,index) =>{
+      const {_id,content,likes:{likeCount},comment,media,username,createdAt} = post
+      return <div key={_id} className='post-Card'>
         <div className='post-user-detail'>
-          <div><img className="post-profile-image" src={detail.avatar}/></div>
+          <div><img className="post-profile-image" src={detail.avatar} alt={username}/></div>
           <div>
           <p>{detail.firstName + " " + detail.lastName} </p>
           <p>{detail.username}</p>
@@ -55,6 +65,7 @@ export default function UserPost() {
           <p><button onClick={() => likedDisLikePost(post,index)} className='like-btn'>{likedPostID.includes(_id)?<FontAwesomeIcon icon={faHeart} style={{ color: '#F38181' }} />:<FontAwesomeIcon icon={faHeart}/> }</button>{likeCount}</p>
         <p><button>Comment</button>:{comment.length}</p>
         <p><button>BookMark</button></p>
+        <p className="date-formate">{createdAt}</p>
         </div>
         <div className='post-card-menu'>
         <button onClick={handleClick} className='showBtn'>

@@ -13,10 +13,19 @@ export default function HomeAllPost() {
     setShowOptions(!showOptions);
   };
 
+  const sortedDataDate = allPost.length >0 && allPost.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const allPostData =sortedDataDate.length>0 && sortedDataDate.map(obj => {
+    const date = new Date(obj.createdAt);
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    
+    return { ...obj, createdAt: formattedDate };
+  });
+
 
   return (
     <>
-      {allPost.map((post,index) => {
+      {allPostData.length>0 && allPostData.map((post,index) => {
         const {
           _id,
           content,
@@ -27,6 +36,7 @@ export default function HomeAllPost() {
           lastName,
           avatar,
           username,
+          createdAt
         } = post;
         return (
           <div className="post-Card">
@@ -66,6 +76,7 @@ export default function HomeAllPost() {
               <p>
                 <button>BookMark</button>
               </p>
+              <p className="date-formate">{createdAt}</p>
             </div>
             <div className="post-card-menu">
               <button onClick={handleClick} className="showBtn">

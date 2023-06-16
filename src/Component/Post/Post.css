@@ -11,6 +11,7 @@
 }
 
 .post-btns-container{
+  position: relative;
     display: flex;
     
 }
@@ -70,4 +71,11 @@
   }
   .like-btn:active{
     transform: scale(1.5);
+  }
+
+  .date-formate{
+    position: absolute;
+    right: 0;
+    font-size: 0.7rem;
+    font-weight: 600;
   }

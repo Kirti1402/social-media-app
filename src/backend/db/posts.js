@@ -21,7 +21,7 @@ export const posts = [
     lastName: "Deo",
     avatar:"https://img.freepik.com/free-psd/3d-female-character-working-laptop-while-sitting-chair_23-2148938889.jpg",
     username: "jo@0128",
-    createdAt: formatDate(),
+    createdAt: "2022-05-20T10:55:06+05:30",
     updatedAt: formatDate(),
   },
   {
@@ -38,7 +38,7 @@ export const posts = [
     avatar:"https://img.freepik.com/free-psd/3d-female-character-working-laptop-while-sitting-chair_23-2148938889.jpg",
    
     username: "jo@0128",
-    createdAt: formatDate(),
+    createdAt: "2023-05-20T10:55:06+05:30",
     updatedAt: formatDate(),
   }, {
     _id: uuid(),
@@ -53,7 +53,7 @@ export const posts = [
     lastName: "Deo",
     avatar:"https://img.freepik.com/free-psd/3d-female-character-working-laptop-while-sitting-chair_23-2148938889.jpg",
     username: "jo@0128",
-    createdAt: formatDate(),
+    createdAt: "2023-06-15T10:55:06+05:30",
     updatedAt: formatDate(),
   }, {
     _id: uuid(),
@@ -69,7 +69,7 @@ export const posts = [
     lastName: "Deo",
     avatar:"https://img.freepik.com/free-vector/strong-man-with-muscles-confetti-background_1308-90834.jpg",
     username: "Jane123_",
-    createdAt: formatDate(),
+    createdAt: "2021-05-01T10:55:06+05:30",
     updatedAt: formatDate(),
   },
   {
@@ -85,7 +85,7 @@ export const posts = [
     lastName: "Singh",
     avatar:"https://cdn.pixabay.com/photo/2022/07/08/18/51/female-7309755_1280.png",
     username: "Kittu@0128",
-    createdAt: formatDate(),
+    createdAt: "2022-12-20T10:55:06+05:30",
     updatedAt: formatDate(),
   },
   {
@@ -101,7 +101,7 @@ export const posts = [
     lastName: "Deo",
     avatar:"https://img.freepik.com/free-psd/3d-female-character-working-laptop-while-sitting-chair_23-2148938889.jpg",
     username: "jo@0128",
-    createdAt: formatDate(),
+    createdAt: "2023-01-18T10:55:06+05:30",
     updatedAt: formatDate(),
   },
 ];
