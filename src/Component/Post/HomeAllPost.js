@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import { PostContext } from "../../Context/PostContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart ,faBookmark} from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/allUser";
-import { toast } from "react-toastify";
 
 export default function HomeAllPost() {
   const navigate= useNavigate();
