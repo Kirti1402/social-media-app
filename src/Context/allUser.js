@@ -27,23 +27,9 @@ export const UserProvider = ({ children }) => {
       console.log(e);
     }
   };
-
-  const setUserDataRespectivePage = async (id) => {
-    try {
-      const user = await fetch(`/api/users/${id}`, {
-        method: "GET",
-      });
-      const response = await user.json();
-      localStorage.setItem('userDetail', JSON.stringify(response.user));
-      userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
-      setLoggedIn(!loggedIn)
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   const getUserData =  (id) => {
     const loggedInUser = JSON.parse(localStorage.getItem("User"));
+    console.log("getuserdata method called",id)
     if(id === loggedInUser._id){
       localStorage.setItem('userDetail', JSON.stringify(loggedInUser));
       userDetailDispatch({ type: "SET_USER_DATA", payload: loggedInUser });
@@ -52,6 +38,23 @@ export const UserProvider = ({ children }) => {
     }
    
   };
+  const setUserDataRespectivePage = async (id) => {
+    console.log("setuserdaatarespective",id)
+    try {
+      const user = await fetch(`/api/users/${id}`, {
+        method: "GET",
+      });
+      const response = await user.json();
+      console.log("responsegetuserdata",user)
+      localStorage.setItem('userDetail', JSON.stringify(response.user));
+      userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
+      setLoggedIn(!loggedIn)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+ 
 
   useEffect(() => {
     getAllUsers();

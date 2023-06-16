@@ -13,22 +13,12 @@ export default function UserPost() {
   const detail = userDetailState.userData;
 
   console.log("postState",postState)
-
-  const sortedDataDate = postState.post.length >0 && postState.post.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  const userPostData =sortedDataDate.length>0 && sortedDataDate.map(obj => {
-    const date = new Date(obj.createdAt);
-    const options = { day: 'numeric', month: 'short', year: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', options);
-    
-    return { ...obj, createdAt: formattedDate };
-  });
-  console.log("SortedData",sortedDataDate);
+  let userPost = postState.post
   const [showOptions, setShowOptions] = useState(false);
 
   const handleClick = () => {
     setShowOptions(!showOptions);
   };
-  console.log(postState)
   const likedDisLikePost = (post,index) =>{
 
     if (!likedPostID.includes(post._id)){
@@ -43,17 +33,17 @@ export default function UserPost() {
     }
   }
 
-  console.log(likedPostID)
+  console.log("userPost",userPost)
   return (
     <>
-    {userPostData.length>0 && userPostData.map((post,index) =>{
-      const {_id,content,likes:{likeCount},comment,media,username,createdAt} = post
+    {userPost.length>0 && userPost.map((post,index) =>{
+      const {_id,content,likes:{likeCount},comment,media,username,createdAt,firstName,lastName,avatar} = post
       return <div key={_id} className='post-Card'>
         <div className='post-user-detail'>
-          <div><img className="post-profile-image" src={detail.avatar} alt={username}/></div>
+          <div><img className="post-profile-image" src={avatar} alt={username}/></div>
           <div>
-          <p>{detail.firstName + " " + detail.lastName} </p>
-          <p>{detail.username}</p>
+          <p>{firstName + " " + lastName} </p>
+          <p>{username}</p>
           </div>
          
         </div>

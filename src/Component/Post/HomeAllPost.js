@@ -1,13 +1,21 @@
 import React, { useContext, useState } from "react";
 import { PostContext } from "../../Context/PostContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart ,faBookmark} from "@fortawesome/free-solid-svg-icons";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/allUser";
+import { toast } from "react-toastify";
 
 export default function HomeAllPost() {
+  const navigate= useNavigate();
+  const {getUserData} = useContext(UserContext);
   const {
     postState: { allPost },
     likedPostID,
     likedDislikePostHandle,
+    getUserPost,
+    bookmarkedID,
+    setBookmarkID
   } = useContext(PostContext);
   const [showOptions, setShowOptions] = useState(false);
   const [isTrending, setIsTrending] = useState(false);
@@ -48,6 +56,27 @@ export default function HomeAllPost() {
     setLatestPost(true);
   };
 
+  const handleProfileClick = (id,username) =>{
+    console.log("id",id,"username",username)
+    getUserData(id)
+    getUserPost(username);
+  }
+  const bookMarkHadle = (post,index) =>{
+    if (!bookmarkedID.includes(post._id)){
+      // postLikeHandler(post._id);
+      setBookmarkID([...bookmarkedID,post._id]);
+      toast.success(`You bookmarked`, {
+        autoClose: 1000,
+      });
+    } else {
+      const updatedArray = bookmarkedID.filter((id) => id !== post._id);
+      setBookmarkID(updatedArray);
+      // postDisLikeHandler(post._id)
+      toast.success(`You removed bookmarked `, {
+        autoClose: 1000,
+      });
+    }
+  }
   return (
     <>
       <div className="filtered-container">
@@ -71,15 +100,20 @@ export default function HomeAllPost() {
           } = post;
           return (
             <div className="post-Card">
+              
               <div className="post-user-detail">
-                <div>
+                <div >
+              <Link className="post-card-link" to={`/profile/${username}`} onClick={()=>handleProfileClick(_id,username)}>
                   <img className="post-profile-image" src={avatar} />
+                </Link>
                 </div>
                 <div>
                   <p>{firstName + " " + lastName} </p>
                   <p>{username}</p>
                 </div>
               </div>
+                
+              
               <div className="post-content">
                 {media && <img className="media" src={media} />}
                 <p>{content}</p>
@@ -93,10 +127,10 @@ export default function HomeAllPost() {
                     {likedPostID.includes(_id) ? (
                       <FontAwesomeIcon
                         icon={faHeart}
-                        style={{ color: "#F38181" }}
+                        style={{ color: "#F38181",height:'20px' }}
                       />
                     ) : (
-                      <FontAwesomeIcon icon={faHeart} />
+                      <FontAwesomeIcon icon={faHeart} style={{height:'20px' }} />
                     )}
                   </button>
                   {likeCount}
@@ -105,7 +139,7 @@ export default function HomeAllPost() {
                   <button>Comment</button>:{comment.length}
                 </p>
                 <p>
-                  <button>BookMark</button>
+                  <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>
                 </p>
                 <p className="date-formate">{createdAt}</p>
               </div>

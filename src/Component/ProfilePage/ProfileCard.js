@@ -26,7 +26,7 @@ export default function ProfileCard() {
 
   const loggingUserDetail = JSON.parse(localStorage.getItem("User"));
   const userDetail = JSON.parse(localStorage.getItem("userDetail"));
-
+  console.log("userDetailState",userDetailState)
   const detail = userDetailState.userData;
 
   const {

@@ -1,11 +1,13 @@
 import React, { useContext,useState } from 'react'
 import { PostContext } from '../../Context/PostContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart ,faBookmark} from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 
 export default function LikedPost() {
-    const { postState, likedPostID,likedDislikePostHandle} = useContext(PostContext);
+    const { postState, likedPostID,likedDislikePostHandle,bookmarkedID,
+      setBookmarkID} = useContext(PostContext);
     const allpost = postState.allPost;
     console.log(allpost)
     const likedPost = allpost && allpost.filter((post)=>{
@@ -17,6 +19,23 @@ export default function LikedPost() {
     const handleClick = () => {
       setShowOptions(!showOptions);
     };
+
+    const bookMarkHadle = (post,index) =>{
+      if (!bookmarkedID.includes(post._id)){
+        // postLikeHandler(post._id);
+        setBookmarkID([...bookmarkedID,post._id]);
+        toast.success(`You bookmarked`, {
+          autoClose: 1000,
+        });
+      } else {
+        const updatedArray = bookmarkedID.filter((id) => id !== post._id);
+        setBookmarkID(updatedArray);
+        // postDisLikeHandler(post._id)
+        toast.success(`You removed bookmarked `, {
+          autoClose: 1000,
+        });
+      }
+    }
 console.log(likedPost)
   return (
     <>
@@ -56,13 +75,13 @@ console.log(likedPost)
                   className="like-btn"
                 >
                   {likedPostID.includes(_id) ? (
-                    <FontAwesomeIcon
-                      icon={faHeart}
-                      style={{ color: "#F38181" }}
-                    />
-                  ) : (
-                    <FontAwesomeIcon icon={faHeart} />
-                  )}
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        style={{ color: "#F38181",height:'20px' }}
+                      />
+                    ) : (
+                      <FontAwesomeIcon icon={faHeart} style={{height:'20px' }} />
+                    )}
                 </button>
                 {likeCount}
               </p>
@@ -70,8 +89,8 @@ console.log(likedPost)
                 <button>Comment</button>:{comment.length}
               </p>
               <p>
-                <button>BookMark</button>
-              </p>
+                  <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>
+                </p>
             </div>
             <div className="post-card-menu">
               <button onClick={handleClick} className="showBtn">
