@@ -12,8 +12,6 @@ export default function HomeAllPost() {
   const [showOptions, setShowOptions] = useState(false);
   const [isTrending, setIsTrending] = useState(false);
   const [latestPost, setLatestPost] = useState(true);
-
-  // const [allPostData,setAllPostData] = useState([]);
   const handleClick = () => {
     setShowOptions(!showOptions);
   };
@@ -29,7 +27,6 @@ export default function HomeAllPost() {
       const formattedDate = date.toLocaleDateString("en-US", options);
       return { ...obj, createdAt: formattedDate };
     });
-
   allPostData = dateFormated;
   let filteredData;
   filteredData =
@@ -53,9 +50,9 @@ export default function HomeAllPost() {
 
   return (
     <>
-      <div>
-        <button onClick={trendingBtnHandle}>Trending</button>
-        <button onClick={latestBtnHandle}>Latest</button>
+      <div className="filtered-container">
+        <button className="filter-btn" onClick={trendingBtnHandle}>Trending</button>
+        <button className="filter-btn" onClick={latestBtnHandle}>Latest</button>
       </div>
 
       {filteredData.length > 0 &&

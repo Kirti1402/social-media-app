@@ -1,81 +1,102 @@
-
-.post-Card{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    /* border: 2px solid black; */
-    margin: 1rem 1rem;
-    padding: 0.5rem;  
-    border-radius: 0.5rem;  
-    box-shadow: 0 0 5px 2px lightgray;
-}
-
-.post-btns-container{
+.post-Card {
   position: relative;
-    display: flex;
-    
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 1rem;
+  padding: 0.5rem;
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border-radius: 1rem;
+  padding: 1.5rem;
 }
 
-.post-btns-container >*{
-    margin-right:1rem
+.post-btns-container {
+  position: relative;
+  display: flex;
 }
 
-.media{
-    border-radius: 0.5rem;
-    width: 100%;
-    height: 150px;
-  }
+.post-btns-container > * {
+  margin-right: 1rem;
+}
 
-  .post-user-detail{
-    display: flex;
-  }
-  .post-user-detail > *{
-    margin: 0.5rem;
-  }
+.media {
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 150px;
+}
 
+.post-user-detail {
+  display: flex;
+}
+.post-user-detail > * {
+  margin: 0.5rem;
+}
 
-  .post-profile-image{
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    border: 2px solid black;
-  }
+.post-profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 2px solid black;
+}
 
-  .post-card-menu{
-    position: absolute;
-    right: 0;
-    margin-right: 0.5rem ;
-  }
+.post-card-menu {
+  position: absolute;
+  right: 0;
+  margin-right: 0.5rem;
+}
 
-  .showBtn{
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-weight: 400;
+.showBtn {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-weight: 400;
+}
 
-  }
+.options {
+  background: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  padding: 0.2rem;
+  outline: none;
+  border-radius: 0.2rem;
+}
 
-  .options{
-    background: whitesmoke;
-    display: flex;
-    flex-direction: column;
-    padding: 0.2rem;
-    outline: none;
-    border-radius: 0.2rem;
-  }
+.like-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.like-btn:active {
+  transform: scale(1.5);
+}
 
-  .like-btn{
-    background: none;
-    border:none;
-    cursor: pointer;
-  }
-  .like-btn:active{
-    transform: scale(1.5);
-  }
+.date-formate {
+  position: absolute;
+  right: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
 
-  .date-formate{
-    position: absolute;
-    right: 0;
-    font-size: 0.7rem;
-    font-weight: 600;
-  }
+.filtered-container {
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* .filtered-container > *{
+    margin: 0 1rem;
+  } */
+
+.filter-btn {
+  margin: 0 1rem;
+  background: #f4ead5;
+  border: none;
+  border-radius: 0 1rem;
+  padding: 0.2rem 0.7rem;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  background-color: #fff6bd;
+}
