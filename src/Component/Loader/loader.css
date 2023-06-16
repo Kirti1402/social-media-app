@@ -1,0 +1,22 @@
+.loader {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: block;
+    margin:15px auto;
+    position: relative;
+    background: #e6c7e8;
+    box-sizing: border-box;
+    animation: shadowExpandX 2s linear infinite alternate;
+  }
+  
+  @keyframes shadowExpandX {
+    0% {
+      box-shadow: 0 0, 0 0;
+      color: rgba(219, 185, 229, 0.2);
+    }
+    100% {
+      box-shadow: -24px 0, 24px 0;
+      color: rgba(227, 192, 234, 0.8);
+    }
+  }

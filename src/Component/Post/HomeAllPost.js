@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function HomeAllPost() {
-  const { postState, likedPostID, setLikesPostID ,postLikeHandler,postDisLikeHandler} = useContext(PostContext);
+  const { postState, likedPostID, setLikesPostID ,postLikeHandler,postDisLikeHandler,likedDislikePostHandle} = useContext(PostContext);
   const {
     postState: { allPost },
   } = useContext(PostContext);
@@ -13,16 +13,7 @@ export default function HomeAllPost() {
     setShowOptions(!showOptions);
   };
 
-  const likedPost = (post,index) =>{
-    if (!likedPostID.includes(post._id)){
-      postLikeHandler(post._id);
-      setLikesPostID([...likedPostID,post._id]);
-    } else {
-      const updatedArray = likedPostID.filter((id) => id !== post._id);
-      setLikesPostID(updatedArray);
-      postDisLikeHandler(post._id)
-    }
-  }
+
   return (
     <>
       {allPost.map((post,index) => {
@@ -55,7 +46,7 @@ export default function HomeAllPost() {
             <div className="post-btns-container">
               <p>
                 <button
-                  onClick={() => likedPost(post, index)}
+                  onClick={() => likedDislikePostHandle(post, index)}
                   className="like-btn"
                 >
                   {likedPostID.includes(_id) ? (

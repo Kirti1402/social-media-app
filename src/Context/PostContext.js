@@ -60,10 +60,21 @@ export const PostProvider = ({ children }) => {
           console.log(e)
         }
       }
+
+      const likedDislikePostHandle = (post,index) =>{
+        if (!likedPostID.includes(post._id)){
+          postLikeHandler(post._id);
+          setLikesPostID([...likedPostID,post._id]);
+        } else {
+          const updatedArray = likedPostID.filter((id) => id !== post._id);
+          setLikesPostID(updatedArray);
+          postDisLikeHandler(post._id)
+        }
+      }
   useEffect(()=>{
     getAllPost();
   },[])
 
 
-  return <PostContext.Provider value={{getUserPost,postState,likedPostID,setLikesPostID,postLikeHandler,postDisLikeHandler}}>{children}</PostContext.Provider>;
+  return <PostContext.Provider value={{getUserPost,postState,likedPostID,setLikesPostID,postLikeHandler,postDisLikeHandler,likedDislikePostHandle}}>{children}</PostContext.Provider>;
 };

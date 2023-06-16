@@ -19,7 +19,7 @@ export default function UserPost() {
     setShowOptions(!showOptions);
   };
   console.log(postState)
-  const likedPost = (post,index) =>{
+  const likedDisLikePost = (post,index) =>{
 
     if (!likedPostID.includes(post._id)){
       postLikeHandler(post._id);
@@ -52,7 +52,7 @@ export default function UserPost() {
         <p>{content}</p>
         </div>
         <div className='post-btns-container'>
-          <p><button onClick={() => likedPost(post,index)} className='like-btn'>{likedPostID.includes(_id)?<FontAwesomeIcon icon={faHeart} style={{ color: '#F38181' }} />:<FontAwesomeIcon icon={faHeart}/> }</button>{likeCount}</p>
+          <p><button onClick={() => likedDisLikePost(post,index)} className='like-btn'>{likedPostID.includes(_id)?<FontAwesomeIcon icon={faHeart} style={{ color: '#F38181' }} />:<FontAwesomeIcon icon={faHeart}/> }</button>{likeCount}</p>
         <p><button>Comment</button>:{comment.length}</p>
         <p><button>BookMark</button></p>
         </div>
