@@ -1,19 +1,33 @@
 import React, { useContext, useState } from "react";
 import { PostContext } from "../../Context/PostContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function HomeAllPost() {
+  const { postState, likedPostID, setLikesPostID ,postLikeHandler,postDisLikeHandler} = useContext(PostContext);
   const {
     postState: { allPost },
   } = useContext(PostContext);
-  console.log(allPost);
   const [showOptions, setShowOptions] = useState(false);
   const handleClick = () => {
     setShowOptions(!showOptions);
   };
+
+  const likedPost = (post,index) =>{
+    if (!likedPostID.includes(post._id)){
+      postLikeHandler(post._id);
+      setLikesPostID([...likedPostID,post._id]);
+    } else {
+      const updatedArray = likedPostID.filter((id) => id !== post._id);
+      setLikesPostID(updatedArray);
+      postDisLikeHandler(post._id)
+    }
+  }
   return (
     <>
-      {allPost.map((post) => {
+      {allPost.map((post,index) => {
         const {
+          _id,
           content,
           likes: { likeCount },
           comment,
@@ -40,7 +54,19 @@ export default function HomeAllPost() {
             </div>
             <div className="post-btns-container">
               <p>
-                <button>like</button>
+                <button
+                  onClick={() => likedPost(post, index)}
+                  className="like-btn"
+                >
+                  {likedPostID.includes(_id) ? (
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      style={{ color: "#F38181" }}
+                    />
+                  ) : (
+                    <FontAwesomeIcon icon={faHeart} />
+                  )}
+                </button>
                 {likeCount}
               </p>
               <p>

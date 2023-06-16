@@ -66,4 +66,8 @@
   .like-btn{
     background: none;
     border:none;
+    cursor: pointer;
+  }
+  .like-btn:active{
+    transform: scale(1.5);
   }

@@ -7,11 +7,12 @@ import "./Post.css"
 
 
 export default function UserPost() {
-  const  {postState,likedPostID,setLikesPostID} = useContext(PostContext)
+  const  {postState,likedPostID,setLikesPostID,postLikeHandler,getUserPost,postDisLikeHandler} = useContext(PostContext)
   const { userDetailState } =
   useContext(UserContext);
   const detail = userDetailState.userData;
 
+  console.log("postState",postState)
   const [showOptions, setShowOptions] = useState(false);
 
   const handleClick = () => {
@@ -19,12 +20,16 @@ export default function UserPost() {
   };
   console.log(postState)
   const likedPost = (post,index) =>{
+
     if (!likedPostID.includes(post._id)){
+      postLikeHandler(post._id);
+      getUserPost(post.username)
       setLikesPostID([...likedPostID,post._id]);
     } else {
-      const updatedList = likedPostID
-      updatedList.splice(index,1);
-      setLikesPostID([updatedList])
+      const updatedArray = likedPostID.filter((id) => id !== post._id);
+      setLikesPostID(updatedArray);
+      postDisLikeHandler(post._id)
+      getUserPost(post.username)
     }
   }
 
