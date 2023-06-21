@@ -6,7 +6,6 @@ export default function SideNavigation() {
   return (
     <div className='sideNavigation-container'>
         <Link  className="link" to="/">Home</Link>
-        <Link className="link" to="/trendingPost">Trending</Link>
         <Link className="link" to="/likedPost">Liked</Link>
         <Link className="link" to="/bookmarkedPost">Bookmarked</Link>
     </div>

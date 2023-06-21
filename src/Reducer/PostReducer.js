@@ -1,6 +1,7 @@
 export const postIntialState = {
     post : [],
-    allPost:[]
+    allPost:[],
+    bookmark:[]
 }
 
 export const postUserReducer = (state,action) =>{
@@ -9,5 +10,7 @@ export const postUserReducer = (state,action) =>{
             return {...state, post: action.payload}
         case "SET_ALL_POST":
                 return {...state, allPost: action.payload}
+        case "SET_BOOKMARK":
+                return {...state, bookmark: action.payload}
     }
 }

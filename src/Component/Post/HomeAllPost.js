@@ -15,7 +15,9 @@ export default function HomeAllPost() {
     likedDislikePostHandle,
     getUserPost,
     bookmarkedID,
-    setBookmarkID
+    setBookmarkID,
+    postBookMarkHandler,
+    postBookMarRemovekHandler
   } = useContext(PostContext);
   const [showOptions, setShowOptions] = useState(false);
   const [isTrending, setIsTrending] = useState(false);
@@ -63,7 +65,7 @@ export default function HomeAllPost() {
   }
   const bookMarkHadle = (post,index) =>{
     if (!bookmarkedID.includes(post._id)){
-      // postLikeHandler(post._id);
+      postBookMarkHandler(post._id);
       setBookmarkID([...bookmarkedID,post._id]);
       toast.success(`You bookmarked`, {
         autoClose: 1000,
@@ -71,7 +73,7 @@ export default function HomeAllPost() {
     } else {
       const updatedArray = bookmarkedID.filter((id) => id !== post._id);
       setBookmarkID(updatedArray);
-      // postDisLikeHandler(post._id)
+      postBookMarRemovekHandler(post._id)
       toast.success(`You removed bookmarked `, {
         autoClose: 1000,
       });
@@ -103,17 +105,14 @@ export default function HomeAllPost() {
               
               <div className="post-user-detail">
                 <div >
-              <Link className="post-card-link" to={`/profile/${username}`} onClick={()=>handleProfileClick(_id,username)}>
                   <img className="post-profile-image" src={avatar} />
-                </Link>
+
                 </div>
                 <div>
                   <p>{firstName + " " + lastName} </p>
                   <p>{username}</p>
                 </div>
               </div>
-                
-              
               <div className="post-content">
                 {media && <img className="media" src={media} />}
                 <p>{content}</p>

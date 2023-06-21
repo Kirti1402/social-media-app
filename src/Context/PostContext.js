@@ -90,11 +90,43 @@ export const PostProvider = ({ children }) => {
         }
       }
 
+      const postBookMarkHandler = async (postID) => {
+        try{
+          const user = await fetch(`/api/users/bookmark/${postID}`, {
+            method: "POST",
+            headers: {
+              authorization: `${token}`,
+            },
+          });
+          const response = await user.json();
+          console.log(response)
+          // postDispatch({type:"SET_BOOKMARK",payload:response.bookmarks})
+        }catch(e){
+          console.log(e)
+        }
+      }
+
+      const postBookMarRemovekHandler = async (postID) => {
+        try{
+          const user = await fetch(`/api/users/remove-bookmark/${postID}`, {
+            method: "POST",
+            headers: {
+              authorization: `${token}`,
+            },
+          });
+          const response = await user.json();
+          console.log("Error",response)
+          // postDispatch({type:"SET_BOOKMARK",payload:response.bookmarks})
+        }catch(e){
+          console.log(e)
+        }
+      }
+
 
   useEffect(()=>{
     getAllPost();
   },[])
 
 
-  return <PostContext.Provider value={{getUserPost,postState,likedPostID,setLikesPostID,postLikeHandler,postDisLikeHandler,likedDislikePostHandle,bookmarkedID,setBookmarkID}}>{children}</PostContext.Provider>;
+  return <PostContext.Provider value={{getUserPost,postState,likedPostID,setLikesPostID,postLikeHandler,postDisLikeHandler,likedDislikePostHandle,bookmarkedID,setBookmarkID,postBookMarkHandler,postBookMarRemovekHandler}}>{children}</PostContext.Provider>;
 };
