@@ -8,7 +8,7 @@ export default function ProfileCard() {
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
   const navigate = useNavigate()
-
+  const loggedInUser = JSON.parse(localStorage.getItem("User"));
   const {
     userDetailState,
     getUserData,
@@ -66,9 +66,9 @@ export default function ProfileCard() {
       {detail && firstName && lastName && (
         <>
           <div className="avatar-user-detail">
-            <img className="background-image" src={backgroundImage} />
+            {backgroundImage ? <img className="background-image" src={backgroundImage} /> :<img className="background-image" src="https://img.freepik.com/free-psd/travel-sales-background_23-2150350125.jpg" />}
             <div className="user-desc">
-              <img className="profile-image" src={avatar} />
+              {avatar? <img className="profile-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg" />}
               <div className="username-desc">
                 <p style={{fontWeight:'700',fontSize:'18px'}}>{firstName + " " + lastName} </p>
                 <p>{username}</p>
@@ -102,7 +102,7 @@ export default function ProfileCard() {
             </div>
           </div>
           <div className="action-btn">
-            {logged ? (
+            {(loggedInUser.username === username) ? (
               <button onClick={handleLogOut}>Log Out</button>
             ) : (
               <button onClick={() => handleFollowUnfollow(_id)}>

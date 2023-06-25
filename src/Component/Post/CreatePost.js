@@ -19,7 +19,7 @@ export default function CreatePost() {
     }
    
     let post = postState.createPost;
-    post = {...post, content:value}
+    post = {...post, content:value,firstName:Getuser.firstName,lastName:Getuser.lastName,username:Getuser.username}
     postDispatch({ type: "SET_CONTENT", payload: post });
   }
 

@@ -23,10 +23,6 @@ export default function Header() {
 
   const profileUser = JSON.parse(localStorage.getItem("User"));
 
-  // useEffect(()=>{
-  //   userDataDispatch({ type: "SET_USER", payload: profileUser })
-  // },[])
-
   console.log(userDataState);
 
   return (
@@ -43,7 +39,7 @@ export default function Header() {
                 getUserDataHandle(profileUser._id, profileUser.username)
               }
             >
-              <img className="user-profile-image" src={profileUser.avatar} />
+              {profileUser.avatar? <img className="user-profile-image" src={profileUser.avatar} />: <img className="profile-image" src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg" />}
             </Link>
           </div>
         )}
