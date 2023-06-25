@@ -1,18 +1,16 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "../../Context/allUser";
 import { FollowUnfollowcontext } from "../../Context/FollowUnFollowContext";
 import { PostContext } from "../../Context/PostContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ProfileCard() {
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
+  const navigate = useNavigate()
 
   const {
     userDetailState,
-    profileState,
-    profileDispatch,
-    userDetailDispatch,
     getUserData,
   } = useContext(UserContext);
   const {
@@ -20,13 +18,8 @@ export default function ProfileCard() {
     unFollowHandle,
     followUnfollow,
     setFollowUnfollow,
-    followUnfollowIntialstate,
   } = useContext(FollowUnfollowcontext);
   const {getUserPost} = useContext(PostContext);
-
-  const loggingUserDetail = JSON.parse(localStorage.getItem("User"));
-  const userDetail = JSON.parse(localStorage.getItem("userDetail"));
-  console.log("userDetailState",userDetailState)
   const detail = userDetailState.userData;
 
   const {
@@ -58,6 +51,14 @@ export default function ProfileCard() {
   const handleAvatarClick = (id,username) =>{
     getUserData(id)
     getUserPost(username);
+  }
+
+  const handleLogOut = () =>{
+    console.log("logout")
+
+    localStorage.removeItem("EncodedToken");
+    navigate("/")
+    
   }
 
   return (
@@ -102,7 +103,7 @@ export default function ProfileCard() {
           </div>
           <div className="action-btn">
             {logged ? (
-              <button>Log Out</button>
+              <button onClick={handleLogOut}>Log Out</button>
             ) : (
               <button onClick={() => handleFollowUnfollow(_id)}>
                 {followUnfollow.includes(_id) ? "UnFollow" : "Follow"}

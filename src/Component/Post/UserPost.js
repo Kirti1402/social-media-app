@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import "./Post.css";
 
 export default function UserPost() {
+  const loggedInUser = JSON.parse(localStorage.getItem("User"));
+  const [editDelete,setEditDelete] = useState([]);
   const {
     postState,
     likedPostID,
@@ -15,17 +17,23 @@ export default function UserPost() {
     getUserPost,
     postDisLikeHandler,
     bookmarkedID,
-    setBookmarkID
+    setBookmarkID,
+    deletePost
   } = useContext(PostContext);
-  const { userDetailState } = useContext(UserContext);
-  const detail = userDetailState.userData;
-
-  console.log("postState", postState);
   let userPost = postState.post;
   const [showOptions, setShowOptions] = useState(false);
 
-  const handleClick = () => {
-    setShowOptions(!showOptions);
+  const handleClick = (post) => {
+
+    if (!editDelete.includes(post._id)){
+      setShowOptions(true);
+      setEditDelete([...editDelete,post._id]);
+    } else {
+      setShowOptions(false);
+      const updatedArray = editDelete.filter((id) => id !== post._id);
+      setEditDelete(updatedArray);
+    }
+
   };
   const likedDisLikePost = (post, index) => {
     if (!likedPostID.includes(post._id)) {
@@ -41,7 +49,6 @@ export default function UserPost() {
   };
   const bookMarkHadle = (post,index) =>{
     if (!bookmarkedID.includes(post._id)){
-      // postLikeHandler(post._id);
       setBookmarkID([...bookmarkedID,post._id]);
       toast.success(`You bookmarked`, {
         autoClose: 1000,
@@ -49,17 +56,15 @@ export default function UserPost() {
     } else {
       const updatedArray = bookmarkedID.filter((id) => id !== post._id);
       setBookmarkID(updatedArray);
-      // postDisLikeHandler(post._id)
       toast.success(`You removed bookmarked `, {
         autoClose: 1000,
       });
     }
   }
 
-  console.log("userPost", userPost);
   return (
     <>
-      {userPost.length > 0 &&
+      {userPost &&
         userPost.map((post, index) => {
           const {
             _id,
@@ -110,24 +115,22 @@ export default function UserPost() {
                   {likeCount}
                 </p>
                 <p>
-                  <button>Comment</button>:{comment.length}
-                </p>
-                <p>
                   <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>
                 </p>
                 <p className="date-formate">{createdAt}</p>
               </div>
-              <div className="post-card-menu">
-                <button onClick={handleClick} className="showBtn">
-                  {showOptions ? "X" : "○○○"}
+              {loggedInUser.username === username && <div className="post-card-menu">
+                
+                <button onClick={()=>handleClick(post)} className="showBtn">
+                  {(showOptions && editDelete.includes(_id)) ? "X" : "○○○"}
                 </button>
-                {showOptions && (
+                {(showOptions && editDelete.includes(_id)) && (
                   <div className="options">
-                    <button className="showBtn">Edit</button>
-                    <button className="showBtn">Delete</button>
+                    <button className="showBtn edit">Edit</button>
+                    <button className="showBtn delete" onClick={()=>deletePost(_id)}>Delete</button>
                   </div>
                 )}
-              </div>
+              </div>}
             </div>
           );
         })}

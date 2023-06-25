@@ -39,7 +39,7 @@ export default function LikedPost() {
 console.log(likedPost)
   return (
     <>
-    {likedPost.length >0 ? 
+    {likedPost ? 
     
     likedPost.map((post,index) => {
         const {
@@ -86,7 +86,7 @@ console.log(likedPost)
                 {likeCount}
               </p>
               <p>
-                <button>Comment</button>:{comment.length}
+                <button>Comment</button>:{comment && comment.length}
               </p>
               <p>
                   <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>

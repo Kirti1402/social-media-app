@@ -1,36 +1,47 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../Context/PostContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart ,faBookmark} from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/allUser";
+import CreatePost from "./CreatePost";
 
 export default function HomeAllPost() {
-  const navigate= useNavigate();
-  const {getUserData} = useContext(UserContext);
+  const loggedInUser = JSON.parse(localStorage.getItem("User"));
+  const [editDelete,setEditDelete] = useState([]);
   const {
     postState: { allPost },
     likedPostID,
     likedDislikePostHandle,
-    getUserPost,
     bookmarkedID,
     setBookmarkID,
     postBookMarkHandler,
-    postBookMarRemovekHandler
+    postBookMarRemovekHandler,
+    deletePost
   } = useContext(PostContext);
   const [showOptions, setShowOptions] = useState(false);
   const [isTrending, setIsTrending] = useState(false);
   const [latestPost, setLatestPost] = useState(true);
-  const handleClick = () => {
-    setShowOptions(!showOptions);
+  const handleClick = (post) => {
+
+    if (!editDelete.includes(post._id)){
+      setShowOptions(true);
+      setEditDelete([...editDelete,post._id]);
+    } else {
+      setShowOptions(false);
+      const updatedArray = editDelete.filter((id) => id !== post._id);
+      setEditDelete(updatedArray);
+    }
+
   };
+
   let allPostData;
   const sortedDataDate =
-    allPost.length > 0 &&
+    allPost &&
     allPost.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   const dateFormated =
-    sortedDataDate.length > 0 &&
+    sortedDataDate &&
     sortedDataDate.map((obj) => {
       const date = new Date(obj.createdAt);
       const options = { day: "numeric", month: "short", year: "numeric" };
@@ -58,11 +69,6 @@ export default function HomeAllPost() {
     setLatestPost(true);
   };
 
-  const handleProfileClick = (id,username) =>{
-    console.log("id",id,"username",username)
-    getUserData(id)
-    getUserPost(username);
-  }
   const bookMarkHadle = (post,index) =>{
     if (!bookmarkedID.includes(post._id)){
       postBookMarkHandler(post._id);
@@ -85,8 +91,10 @@ export default function HomeAllPost() {
         <button className="filter-btn" onClick={trendingBtnHandle}>Trending</button>
         <button className="filter-btn" onClick={latestBtnHandle}>Latest</button>
       </div>
-
-      {filteredData.length > 0 &&
+      <div>
+        <CreatePost/>
+      </div>
+      {filteredData &&
         filteredData.map((post, index) => {
           const {
             _id,
@@ -135,24 +143,23 @@ export default function HomeAllPost() {
                   {likeCount}
                 </p>
                 <p>
-                  <button>Comment</button>:{comment.length}
-                </p>
-                <p>
                   <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>
                 </p>
                 <p className="date-formate">{createdAt}</p>
               </div>
-              <div className="post-card-menu">
-                <button onClick={handleClick} className="showBtn">
-                  {showOptions ? "X" : "○○○"}
+              {loggedInUser.username === username && <div className="post-card-menu">
+                
+                <button onClick={()=>handleClick(post)} className="showBtn">
+                  {(showOptions && editDelete.includes(_id)) ? "X" : "○○○"}
                 </button>
-                {showOptions && (
+                {(showOptions && editDelete.includes(_id)) && (
                   <div className="options">
-                    <button className="showBtn">Edit</button>
-                    <button className="showBtn">Delete</button>
+                    <button className="showBtn edit">Edit</button>
+                    <button className="showBtn delete" onClick={()=>deletePost(_id)}>Delete</button>
                   </div>
                 )}
-              </div>
+              </div>}
+              
             </div>
           );
         })}
