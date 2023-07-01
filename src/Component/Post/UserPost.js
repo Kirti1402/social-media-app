@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { PostContext } from "../../Context/PostContext";
-import { UserContext } from "../../Context/allUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart ,faBookmark} from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
@@ -9,6 +8,10 @@ import "./Post.css";
 export default function UserPost() {
   const loggedInUser = JSON.parse(localStorage.getItem("User"));
   const [editDelete,setEditDelete] = useState([]);
+  const [editBtn ,setEditBtn] = useState(false);
+  const [editAvatar,setEditavatar] = useState("");
+  const [editcontent,setEditContent] = useState("");
+  const [postID,setPostID] = useState(null);
   const {
     postState,
     likedPostID,
@@ -18,7 +21,8 @@ export default function UserPost() {
     postDisLikeHandler,
     bookmarkedID,
     setBookmarkID,
-    deletePost
+    deletePost,
+    editPost
   } = useContext(PostContext);
   let userPost = postState.post;
   const [showOptions, setShowOptions] = useState(false);
@@ -61,7 +65,18 @@ export default function UserPost() {
       });
     }
   }
+  const onclickEditHandle = (post) =>{
+    console.log("edit post handle")
+    setEditBtn(true)
+    setEditavatar(post.avatar)
+    setEditContent(post.content)
+    setPostID(post._id);
+  }
 
+  const onClickUpdate = () =>{
+    editPost(postID,{content:editcontent});
+    setEditBtn(false);
+  }
   return (
     <>
       {userPost &&
@@ -126,11 +141,29 @@ export default function UserPost() {
                 </button>
                 {(showOptions && editDelete.includes(_id)) && (
                   <div className="options">
-                    <button className="showBtn edit">Edit</button>
+                    <button className="showBtn edit" onClick={()=>onclickEditHandle(post)}>Edit</button>
                     <button className="showBtn delete" onClick={()=>deletePost(_id)}>Delete</button>
                   </div>
                 )}
               </div>}
+                  {
+                    editBtn &&  <div className="post-user-detail-edit">
+                      <div className="editPost-content">
+                    <img
+                    className="post-profile-image"
+                    src={editAvatar}
+                    alt="image"
+                  />
+                    <textarea className='edit-textarea'
+                      value={editcontent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                    />
+                    </div>
+                    <div>
+                    <button className="update-btn" onClick={onClickUpdate}>Update</button>
+                    </div>
+                  </div>
+                  }
             </div>
           );
         })}

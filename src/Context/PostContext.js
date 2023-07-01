@@ -165,6 +165,27 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const editPost = async (postID,postContent) => {
+    console.log(postID)
+    console.log(postContent)
+    
+    console.log("in Edit post method")
+    try {
+      const user = await fetch(`/api/posts/edit/${postID}`, {
+        method: "POST",
+        headers: {
+          authorization: `${token}`,
+        },
+        body:JSON.stringify(postContent),
+      });
+      const response = await user.json();
+      console.log("editPost", response);
+      postDispatch({ type: "SET_ALL_POST", payload: response.posts });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     getAllPost();
   }, []);
@@ -185,7 +206,8 @@ export const PostProvider = ({ children }) => {
         postBookMarRemovekHandler,
         postDispatch,
         createPost,
-        deletePost
+        deletePost,
+        editPost
       }}
     >
       {children}

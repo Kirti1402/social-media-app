@@ -8,8 +8,6 @@ import { UserContext } from "../../Context/allUser";
 import CreatePost from "./CreatePost";
 
 export default function HomeAllPost() {
-  const loggedInUser = JSON.parse(localStorage.getItem("User"));
-  const [editDelete,setEditDelete] = useState([]);
   const {
     postState: { allPost },
     likedPostID,
@@ -18,23 +16,9 @@ export default function HomeAllPost() {
     setBookmarkID,
     postBookMarkHandler,
     postBookMarRemovekHandler,
-    deletePost
   } = useContext(PostContext);
-  const [showOptions, setShowOptions] = useState(false);
   const [isTrending, setIsTrending] = useState(false);
   const [latestPost, setLatestPost] = useState(true);
-  const handleClick = (post) => {
-
-    if (!editDelete.includes(post._id)){
-      setShowOptions(true);
-      setEditDelete([...editDelete,post._id]);
-    } else {
-      setShowOptions(false);
-      const updatedArray = editDelete.filter((id) => id !== post._id);
-      setEditDelete(updatedArray);
-    }
-
-  };
 
   let allPostData;
   const sortedDataDate =
@@ -85,6 +69,7 @@ export default function HomeAllPost() {
       });
     }
   }
+
   return (
     <>
       <div className="filtered-container">
@@ -146,20 +131,8 @@ export default function HomeAllPost() {
                   <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>
                 </p>
                 <p className="date-formate">{createdAt}</p>
-              </div>
-              {loggedInUser.username === username && <div className="post-card-menu">
-                
-                <button onClick={()=>handleClick(post)} className="showBtn">
-                  {(showOptions && editDelete.includes(_id)) ? "X" : "○○○"}
-                </button>
-                {(showOptions && editDelete.includes(_id)) && (
-                  <div className="options">
-                    <button className="showBtn edit">Edit</button>
-                    <button className="showBtn delete" onClick={()=>deletePost(_id)}>Delete</button>
-                  </div>
-                )}
-              </div>}
               
+             </div>
             </div>
           );
         })}

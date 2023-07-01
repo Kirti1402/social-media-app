@@ -152,3 +152,42 @@
   color: coral;
   background-color: #fff6bd;
 }
+
+.editPost{
+  position: absolute;
+  background-color: aliceblue;
+}
+
+.post-user-detail-edit{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: ghostwhite;
+  border-radius: 5px;
+  width: 90%;
+  height: 25vh;
+}
+.post-user-detail-edit >*{
+  margin: 1rem;
+}
+.editPost-content{
+  display: flex;
+  justify-content: space-around;
+}
+
+.edit-textarea{
+  padding: 5px;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  outline: none;
+  background-color: inherit;
+  width: 100%;
+  height: 10vh;
+}
+.update-btn{
+  margin: auto;
+  background-color: cornflowerblue;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+}
