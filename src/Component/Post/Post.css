@@ -159,12 +159,14 @@
 }
 
 .post-user-detail-edit{
+  left: 50%;
+  transform: translate(-100%,0);
   position: absolute;
   display: flex;
   flex-direction: column;
   background-color: ghostwhite;
   border-radius: 5px;
-  width: 90%;
+  width: 300px;
   height: 25vh;
 }
 .post-user-detail-edit >*{
@@ -185,6 +187,7 @@
   height: 10vh;
 }
 .update-btn{
+  cursor: pointer;
   margin: auto;
   background-color: cornflowerblue;
   border: none;

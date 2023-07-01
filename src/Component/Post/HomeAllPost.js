@@ -83,7 +83,6 @@ export default function HomeAllPost() {
             _id,
             content,
             likes: { likeCount },
-            comment,
             media,
             firstName,
             lastName,

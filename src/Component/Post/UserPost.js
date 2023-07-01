@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../Context/PostContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart ,faBookmark} from "@fortawesome/free-solid-svg-icons";
@@ -24,7 +24,10 @@ export default function UserPost() {
     deletePost,
     editPost
   } = useContext(PostContext);
-  let userPost = postState.post;
+  let userPost ;
+  userPost = postState.post;
+  useEffect(() => {
+  },[]) 
   const [showOptions, setShowOptions] = useState(false);
 
   const handleClick = (post) => {
@@ -142,12 +145,8 @@ export default function UserPost() {
                 {(showOptions && editDelete.includes(_id)) && (
                   <div className="options">
                     <button className="showBtn edit" onClick={()=>onclickEditHandle(post)}>Edit</button>
-                    <button className="showBtn delete" onClick={()=>deletePost(_id)}>Delete</button>
-                  </div>
-                )}
-              </div>}
-                  {
-                    editBtn &&  <div className="post-user-detail-edit">
+                    {
+                    (editBtn) &&  <div className="post-user-detail-edit">
                       <div className="editPost-content">
                     <img
                     className="post-profile-image"
@@ -164,6 +163,11 @@ export default function UserPost() {
                     </div>
                   </div>
                   }
+                    <button className="showBtn delete" onClick={()=>deletePost(_id)}>Delete</button>
+                  </div>
+                )}
+              </div>}
+                  
             </div>
           );
         })}
