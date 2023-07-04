@@ -9,7 +9,6 @@ export default function CreatePost() {
     createPost
   } = useContext(PostContext);
   const Getuser = JSON.parse(localStorage.getItem("User"));
-  console.log(postState)
 
   const postContentHandle = (value)=>{
     if(value.length == 0){
@@ -25,7 +24,6 @@ export default function CreatePost() {
 
 
   const onClickPost = () =>{
-    console.log(postState.createPost)
     if(postState.createPost){
       createPost(postState.createPost);
     }

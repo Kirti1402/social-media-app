@@ -22,9 +22,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (authState.username && authState.password && isLoggedIn) {
       login();
-    } 
+    }
   }, [authState.username, authState.password]);
-
 
   const login = async () => {
     try {
@@ -63,8 +62,8 @@ export const AuthProvider = ({ children }) => {
           password: authState.password,
           email: authState.email,
           password: authState.password,
-          firstName:authState.firstName,
-          lastName:authState.lastName,
+          firstName: authState.firstName,
+          lastName: authState.lastName,
         }),
       });
 
@@ -75,7 +74,7 @@ export const AuthProvider = ({ children }) => {
         userDataDispatch({ type: "SET_USER", payload: response.createdUser });
         navigate("/");
         toast.success(`Successfully Signed Up`);
-      }else{
+      } else {
         setIsLoggedIn(false);
         toast.error(`${response.errors}`);
         throw new Error(response.errors);
@@ -84,8 +83,6 @@ export const AuthProvider = ({ children }) => {
       console.log(e);
     }
   };
-
-  console.log(authState);
 
   return (
     <authContext.Provider
@@ -97,7 +94,7 @@ export const AuthProvider = ({ children }) => {
         login,
         signUp,
         userDataState,
-        userDataDispatch
+        userDataDispatch,
       }}
     >
       {children}

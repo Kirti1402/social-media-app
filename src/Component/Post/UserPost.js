@@ -69,7 +69,6 @@ export default function UserPost() {
     }
   }
   const onclickEditHandle = (post) =>{
-    console.log("edit post handle")
     setEditBtn(true)
     setEditavatar(post.avatar)
     setEditContent(post.content)

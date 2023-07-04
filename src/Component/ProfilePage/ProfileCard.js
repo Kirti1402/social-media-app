@@ -35,8 +35,6 @@ export default function ProfileCard() {
     backgroundImage,
   } = detail;
 
-  console.log(detail);
-
   const handleFollowUnfollow = (_id) => {
     if (followUnfollow.includes(_id)) {
       const updatedArray = followUnfollow.filter((id) => id !== _id);
@@ -54,8 +52,6 @@ export default function ProfileCard() {
   }
 
   const handleLogOut = () =>{
-    console.log("logout")
-
     localStorage.removeItem("EncodedToken");
     navigate("/")
     

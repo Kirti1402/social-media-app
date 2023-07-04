@@ -40,13 +40,11 @@ export default function HomeAllPost() {
         );
 
   const trendingBtnHandle = () => {
-    console.log(isTrending, latestPost);
     setIsTrending(true);
     setLatestPost(false);
   };
 
   const latestBtnHandle = () => {
-    console.log(isTrending, latestPost);
     setIsTrending(false);
     setLatestPost(true);
   };

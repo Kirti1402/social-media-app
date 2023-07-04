@@ -15,15 +15,11 @@ export default function Header() {
   const userDetail = JSON.parse(localStorage.getItem("User"));
 
   const getUserDataHandle = (id, username) => {
-    console.log("profile", profile);
-    console.log("login", userDetail);
     getUserData(id);
     getUserPost(username);
   };
 
   const profileUser = JSON.parse(localStorage.getItem("User"));
-
-  console.log(userDataState);
 
   return (
     <div className="home-conatiner">

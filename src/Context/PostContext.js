@@ -9,19 +9,18 @@ export const PostProvider = ({ children }) => {
   const token = localStorage.getItem("EncodedToken");
   const [likedPostID, setLikesPostID] = useState([]);
   const [bookmarkedID, setBookmarkID] = useState([]);
+  const [refreshFlag, setRefreshFlag] = useState(false);
   const [postState, postDispatch] = useReducer(
     postUserReducer,
     postIntialState
   );
 
   const getUserPost = async (username) => {
-    console.log("getUserPost", username);
     try {
       const user = await fetch(`/api/posts/user/${username}`, {
         method: "GET",
       });
       const response = await user.json();
-      console.log("get user response", response);
       const sortedDataDate =
         response.posts.length > 0 &&
         response.posts.sort(
@@ -108,7 +107,6 @@ export const PostProvider = ({ children }) => {
         },
       });
       const response = await user.json();
-      console.log(response);
       postDispatch({ type: "SET_BOOKMARK", payload: response.bookmarks });
     } catch (e) {
       console.log(e);
@@ -124,7 +122,6 @@ export const PostProvider = ({ children }) => {
         },
       });
       const response = await user.json();
-      console.log("Error", response);
       postDispatch({ type: "SET_BOOKMARK", payload: response.bookmarks });
     } catch (e) {
       console.log(e);
@@ -142,7 +139,6 @@ export const PostProvider = ({ children }) => {
         body: JSON.stringify(post),
       });
       const response = await user.json();
-      console.log("createPost", response);
       postDispatch({ type: "SET_ALL_POST", payload: response.posts });
     } catch (e) {
       console.log(e);
@@ -155,31 +151,26 @@ export const PostProvider = ({ children }) => {
         method: "DELETE",
         headers: {
           authorization: `${token}`,
-        }
+        },
       });
       const response = await user.json();
-      console.log("deletePost", response);
+      setRefreshFlag(true);
       postDispatch({ type: "SET_ALL_POST", payload: response.posts });
     } catch (e) {
       console.log(e);
     }
   };
 
-  const editPost = async (postID,postContent) => {
-    console.log(postID)
-    console.log(postContent)
-    
-    console.log("in Edit post method")
+  const editPost = async (postID, postContent) => {
     try {
       const user = await fetch(`/api/posts/edit/${postID}`, {
         method: "POST",
         headers: {
           authorization: `${token}`,
         },
-        body:JSON.stringify(postContent),
+        body: JSON.stringify(postContent),
       });
       const response = await user.json();
-      console.log("editPost", response);
       postDispatch({ type: "SET_ALL_POST", payload: response.posts });
     } catch (e) {
       console.log(e);
@@ -188,8 +179,9 @@ export const PostProvider = ({ children }) => {
 
   useEffect(() => {
     getAllPost();
+    const getUser = JSON.parse(localStorage.getItem("User"));
+    getUserPost(getUser.username);
   }, []);
-
   return (
     <PostContext.Provider
       value={{
@@ -207,7 +199,9 @@ export const PostProvider = ({ children }) => {
         postDispatch,
         createPost,
         deletePost,
-        editPost
+        editPost,
+        refreshFlag,
+        setRefreshFlag,
       }}
     >
       {children}

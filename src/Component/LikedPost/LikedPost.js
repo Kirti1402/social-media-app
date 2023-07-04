@@ -9,9 +9,7 @@ export default function LikedPost() {
     const { postState, likedPostID,likedDislikePostHandle,bookmarkedID,
       setBookmarkID} = useContext(PostContext);
     const allpost = postState.allPost;
-    console.log(allpost)
     const likedPost = allpost && allpost.filter((post)=>{
-        console.log(post)
         return likedPostID.includes(post._id)
     })
 
@@ -22,7 +20,6 @@ export default function LikedPost() {
 
     const bookMarkHadle = (post,index) =>{
       if (!bookmarkedID.includes(post._id)){
-        // postLikeHandler(post._id);
         setBookmarkID([...bookmarkedID,post._id]);
         toast.success(`You bookmarked`, {
           autoClose: 1000,
@@ -30,13 +27,8 @@ export default function LikedPost() {
       } else {
         const updatedArray = bookmarkedID.filter((id) => id !== post._id);
         setBookmarkID(updatedArray);
-        // postDisLikeHandler(post._id)
-        toast.success(`You removed bookmarked `, {
-          autoClose: 1000,
-        });
       }
     }
-console.log(likedPost)
   return (
     <>
     {likedPost ? 
@@ -84,9 +76,6 @@ console.log(likedPost)
                     )}
                 </button>
                 {likeCount}
-              </p>
-              <p>
-                <button>Comment</button>:{comment && comment.length}
               </p>
               <p>
                   <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>

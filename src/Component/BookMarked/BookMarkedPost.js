@@ -44,7 +44,6 @@ export default function BookMarkedPost() {
     }
   }
 
-  console.log("BookMarkedPost",bookMarkedPost)
   return (
     <>
       {

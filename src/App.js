@@ -10,6 +10,7 @@ import Profile from "./Component/ProfilePage/Profile";
 import TrendingPost from "./Component/TrendingPost/TrendingPost";
 import LikedPage from "./Component/LikedPost/LikedPage";
 import BookMarkedPage from "./Component/BookMarked/BookMarkedPage";
+import Explore from "./Component/Explore/Explore";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/trendingPost" element={<TrendingPost />} />
         <Route path="/likedPost" element={<LikedPage />} />
         <Route path="/bookmarkedPost" element={<BookMarkedPage/>} />
+        <Route path="/explore" element={<Explore/>} />
         <Route
           path="/"
           element={

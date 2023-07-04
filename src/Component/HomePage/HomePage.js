@@ -3,7 +3,9 @@ import UserSuggestion from "../userSuggestion/UserSuggestion";
 import Header from "./Header";
 import "./home.css";
 import SideNavigation from "../SideNavigation/SideNavigation";
+import User from "../HomePage/User"
 import HomeAllPost from "../Post/HomeAllPost";
+import Explore from "../Explore/Explore";
 
 export default function HomePage() {
   return (
@@ -13,7 +15,8 @@ export default function HomePage() {
         <div>
           <SideNavigation />
         </div>
-        <div className="home-page"><HomeAllPost/></div>
+        <div className="home-page"><User/></div>
+        {/* <div className="home-page"><Explore/></div> */}
         <div>
           <UserSuggestion />
         </div>
