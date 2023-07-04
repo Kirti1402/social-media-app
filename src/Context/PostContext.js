@@ -1,7 +1,6 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import { postIntialState, postUserReducer } from "../Reducer/PostReducer";
 import { toast } from "react-toastify";
-import { formatDate } from "../backend/utils/authUtils";
 
 export const PostContext = createContext();
 
@@ -162,6 +161,7 @@ export const PostProvider = ({ children }) => {
   };
 
   const editPost = async (postID, postContent) => {
+    console.log("EditPost",postContent,`/api/posts/edit/${postID}`)
     try {
       const user = await fetch(`/api/posts/edit/${postID}`, {
         method: "POST",
@@ -171,6 +171,7 @@ export const PostProvider = ({ children }) => {
         body: JSON.stringify(postContent),
       });
       const response = await user.json();
+      console.log("EditResponse",response);
       postDispatch({ type: "SET_ALL_POST", payload: response.posts });
     } catch (e) {
       console.log(e);
@@ -179,8 +180,12 @@ export const PostProvider = ({ children }) => {
 
   useEffect(() => {
     getAllPost();
+
     const getUser = JSON.parse(localStorage.getItem("User"));
-    getUserPost(getUser.username);
+    if(getUser){
+      getUserPost(getUser.username);
+    }
+    
   }, []);
   return (
     <PostContext.Provider

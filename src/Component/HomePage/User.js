@@ -28,12 +28,12 @@ export default function User() {
     editPost,
     refreshFlag, setRefreshFlag
   } = useContext(PostContext);
+  let userData = JSON.parse(localStorage.getItem("User"))
   let userPost ;
-  userPost = postState.post;
+  userPost = postState.allPost.filter(({username})=> username === userData.username);
   const [showOptions, setShowOptions] = useState(false);
 
   const handleClick = (post) => {
-
     if (!editDelete.includes(post._id)){
       setShowOptions(true);
       setEditDelete([...editDelete,post._id]);
@@ -65,17 +65,17 @@ export default function User() {
     } else {
       const updatedArray = bookmarkedID.filter((id) => id !== post._id);
       setBookmarkID(updatedArray);
-      toast.success(`You removed bookmarked `, {
-        autoClose: 1000,
-      });
     }
   }
+
   const onclickEditHandle = (post) =>{
     setEditBtn(true)
     setEditavatar(post.avatar)
     setEditContent(post.content)
     setPostID(post._id);
   }
+
+
   let allPostData;
   const sortedDataDate =
   userPost &&
@@ -98,7 +98,7 @@ export default function User() {
         );
 
   const onClickUpdate = () =>{
-    editPost(postID,{content:editcontent});
+    editPost(postID,{content:editcontent,avatar:"",username:"Kittu@0128"});
     setEditBtn(false);
   }
 
@@ -117,10 +117,17 @@ export default function User() {
     }
   }, [refreshFlag]);
 
+  const onclickDelete = (postID)=>{
+    deletePost(postID)
+    toast.success(`Post Deleted Successfully`, {
+      autoClose: 1000,
+    });
+  }
+
   return (
     <>
     {refreshFlag ? 
-  <div>Loading...</div> // or any loading indicator
+  <div>Loading...</div>
  : <><div className="filtered-container">
     <button className="filter-btn" onClick={trendingBtnHandle}>Trending</button>
     <button className="filter-btn" onClick={latestBtnHandle}>Latest</button>
@@ -209,7 +216,7 @@ export default function User() {
                 </div>
               </div>
               }
-                <button className="showBtn delete" onClick={()=>deletePost(_id)}>Delete</button>
+                <button className="showBtn delete" onClick={()=>onclickDelete(_id)}>Delete</button>
               </div>
             )}
           </div>}

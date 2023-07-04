@@ -53,8 +53,9 @@ export default function ProfileCard() {
 
   const handleLogOut = () =>{
     localStorage.removeItem("EncodedToken");
+    localStorage.removeItem("User");
+    localStorage.removeItem("userDetail");
     navigate("/")
-    
   }
 
   return (
@@ -99,7 +100,11 @@ export default function ProfileCard() {
           </div>
           <div className="action-btn">
             {(loggedInUser.username === username) ? (
-              <button onClick={handleLogOut}>Log Out</button>
+              <div>
+                <button onClick={handleLogOut}>Log Out</button>
+                <button>Edit Ptofile</button>
+                </div>
+              
             ) : (
               <button onClick={() => handleFollowUnfollow(_id)}>
                 {followUnfollow.includes(_id) ? "UnFollow" : "Follow"}

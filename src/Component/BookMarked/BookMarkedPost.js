@@ -38,9 +38,6 @@ export default function BookMarkedPost() {
       const updatedArray = bookmarkedID.filter((id) => id !== post._id);
       setBookmarkID(updatedArray);
       postBookMarRemovekHandler(post._id)
-      toast.success(`You removed bookmarked `, {
-        autoClose: 1000,
-      });
     }
   }
 
