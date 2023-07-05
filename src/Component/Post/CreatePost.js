@@ -39,8 +39,7 @@ export default function CreatePost() {
               
               <div className="post-user-detail">
                 <div >
-                  <img className="post-profile-image" src={Getuser.avatar} />
-
+                  <img className="post-profile-image" src={Getuser.avatar} />             
                 </div>
                 <div>
                   <p>{Getuser.firstName + " " + Getuser.lastName} </p>

@@ -5,8 +5,10 @@ import { profilIntialstate, profileReducer } from "../Reducer/ProfileReducer";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const token = localStorage.getItem("EncodedToken");
   const [loggedIn,setLoggedIn] = useState(false);
   const [userId,setUserId] = useState('');
+  const [editProfileBtn,setEditProfileBtn] = useState(false);
   const [userDetailState, userDetailDispatch] = useReducer(userReducer, userIntialState);
   const [profileState, profileDispatch] = useReducer(
     profileReducer,
@@ -50,13 +52,30 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  const editUser = async (post) => {
+    try {
+      const user = await fetch(`/api/users/edit`, {
+        method: "POST",
+        headers: {
+          authorization: `${token}`,
+        },
+        body: JSON.stringify(post),
+      });
+      const response = await user.json();
+      console.log("Edit User",response)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
  
 
   useEffect(() => {
     getAllUsers();
+  
   }, [ ]);
 
   return (
-    <UserContext.Provider value={{ userDetailState,getUserData,profileState, profileDispatch,userDetailDispatch,userId,setUserId,loggedIn,setLoggedIn }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ userDetailState,getUserData,profileState, profileDispatch,userDetailDispatch,userId,setUserId,loggedIn,setLoggedIn,editUser,editProfileBtn,setEditProfileBtn }}>{children}</UserContext.Provider>
   );
 };

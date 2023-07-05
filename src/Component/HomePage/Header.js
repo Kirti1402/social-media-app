@@ -35,7 +35,7 @@ export default function Header() {
                 getUserDataHandle(profileUser._id, profileUser.username)
               }
             >
-              {profileUser.avatar? <img className="user-profile-image" src={profileUser.avatar} />: <img className="profile-image" src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg" />}
+              {profileUser.avatar? <img className="user-profile-image" src={profileUser.avatar} />: <img className="profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
             </Link>
           </div>
         )}

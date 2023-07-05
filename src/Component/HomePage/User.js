@@ -30,7 +30,7 @@ export default function User() {
   } = useContext(PostContext);
   let userData = JSON.parse(localStorage.getItem("User"))
   let userPost ;
-  userPost = postState.allPost.filter(({username})=> username === userData.username);
+  userPost =postState.allPost && postState.allPost.filter(({username})=> username === userData.username);
   const [showOptions, setShowOptions] = useState(false);
 
   const handleClick = (post) => {

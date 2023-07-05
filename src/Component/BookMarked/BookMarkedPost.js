@@ -61,7 +61,8 @@ export default function BookMarkedPost() {
             <div className="post-Card">
               <div className="post-user-detail">
                 <div>
-                  <img className="post-profile-image" src={avatar} />
+                {avatar? <img className="profile-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg" />}
+             
                 </div>
                 <div>
                   <p>{firstName + " " + lastName} </p>
@@ -88,9 +89,6 @@ export default function BookMarkedPost() {
                       )}
                   </button>
                   {likeCount}
-                </p>
-                <p>
-                  <button>Comment</button>:{comment && comment.length}
                 </p>
                 <p>
                     <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>

@@ -138,3 +138,40 @@
 .profile-timeline{
   margin: 4rem;
 }
+
+.bio-detail{
+  margin-top:50px;
+  font-size: 15px;
+  font-family: cursive;
+}
+
+.edit-user{
+  background-color: whitesmoke;
+  padding: 5px;
+  box-shadow: 0 0 2px 2px lightgrey;
+  border-radius: 5px;
+}
+
+.edit-user >* {
+  margin :5px;
+}
+
+.edit-input{
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputfield{
+  width: 100%;
+  padding: 5px;
+  outline: none;
+}
+.update-btn{
+  padding: 2px;
+  border:none;
+  background-color: azure;
+}
+
+.edit-delete-btn>*{
+  margin: 5px;
+}

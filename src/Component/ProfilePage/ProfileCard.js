@@ -3,15 +3,18 @@ import { UserContext } from "../../Context/allUser";
 import { FollowUnfollowcontext } from "../../Context/FollowUnFollowContext";
 import { PostContext } from "../../Context/PostContext";
 import { Link, useNavigate } from "react-router-dom";
+import EditProfile from "./EditProfile";
 
 export default function ProfileCard() {
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
+
   const navigate = useNavigate()
   const loggedInUser = JSON.parse(localStorage.getItem("User"));
   const {
     userDetailState,
     getUserData,
+    editProfileBtn,setEditProfileBtn
   } = useContext(UserContext);
   const {
     followHandle,
@@ -32,8 +35,11 @@ export default function ProfileCard() {
     logged,
     avatar,
     bio,
+    link,
     backgroundImage,
   } = detail;
+
+  console.log(detail)
 
   const handleFollowUnfollow = (_id) => {
     if (followUnfollow.includes(_id)) {
@@ -59,18 +65,22 @@ export default function ProfileCard() {
   }
 
   return (
-    <div>
+    <div className="profile-card">
       {detail && firstName && lastName && (
         <>
           <div className="avatar-user-detail">
             {backgroundImage ? <img className="background-image" src={backgroundImage} /> :<img className="background-image" src="https://img.freepik.com/free-psd/travel-sales-background_23-2150350125.jpg" />}
             <div className="user-desc">
-              {avatar? <img className="profile-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg" />}
+              {avatar? <img className="profile-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
               <div className="username-desc">
                 <p style={{fontWeight:'700',fontSize:'18px'}}>{firstName + " " + lastName} </p>
                 <p>{username}</p>
               </div>
             </div>
+          </div>
+          <div className="bio-detail">
+            <p><span>Bio:</span>{bio}</p>
+            <p><span>Profile:</span><a href={link} target="#">{link}</a></p>
           </div>
           <div className="followers-following">
             <div className="follower-btn">
@@ -100,9 +110,9 @@ export default function ProfileCard() {
           </div>
           <div className="action-btn">
             {(loggedInUser.username === username) ? (
-              <div>
+              <div className="edit-delete-btn">
                 <button onClick={handleLogOut}>Log Out</button>
-                <button>Edit Ptofile</button>
+                <button onClick={()=>setEditProfileBtn(!editProfileBtn)}>Edit Profile</button>
                 </div>
               
             ) : (
@@ -113,6 +123,7 @@ export default function ProfileCard() {
           </div>
         </>
       )}
+      {editProfileBtn && <EditProfile user = {detail} edit={setEditProfileBtn}/>}
     </div>
   );
 }

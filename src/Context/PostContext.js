@@ -138,6 +138,7 @@ export const PostProvider = ({ children }) => {
         body: JSON.stringify(post),
       });
       const response = await user.json();
+      console.log("createPost",response)
       postDispatch({ type: "SET_ALL_POST", payload: response.posts });
     } catch (e) {
       console.log(e);
