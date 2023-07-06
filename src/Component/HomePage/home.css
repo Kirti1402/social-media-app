@@ -3,7 +3,7 @@
     background-color:#C8DAD3;
     display: flex;
     justify-content: space-between;
-    position: fixed;
+    /* position: fixed; */
 }
 
 .home-heading{
@@ -17,5 +17,5 @@
 }
 
 .home-page{
-  margin-top:5rem;
+  margin-top:1rem;
 }

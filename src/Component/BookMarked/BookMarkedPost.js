@@ -94,17 +94,6 @@ export default function BookMarkedPost() {
                     <button  className="bookmark-btn" onClick={()=>bookMarkHadle(post,index)}>{bookmarkedID.includes(_id)?<FontAwesomeIcon icon={faBookmark} style={{ color: "blue" ,height:'20px'}}/>:<FontAwesomeIcon icon={faBookmark} style={{height:'20px'}} />}</button>
                   </p>
               </div>
-              <div className="post-card-menu">
-                <button onClick={handleClick} className="showBtn">
-                  {showOptions ? "X" : "○○○"}
-                </button>
-                {showOptions && (
-                  <div className="options">
-                    <button className="showBtn">Edit</button>
-                    <button className="showBtn">Delete</button>
-                  </div>
-                )}
-              </div>
             </div>
           );
         }) : <p className='no-bookmarked-post'>No bookMark</p>

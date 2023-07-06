@@ -71,7 +71,7 @@ export default function ProfileCard() {
           <div className="avatar-user-detail">
             {backgroundImage ? <img className="background-image" src={backgroundImage} /> :<img className="background-image" src="https://img.freepik.com/free-psd/travel-sales-background_23-2150350125.jpg" />}
             <div className="user-desc">
-              {avatar? <img className="profile-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
+              {avatar? <img className="avatar-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
               <div className="username-desc">
                 <p style={{fontWeight:'700',fontSize:'18px'}}>{firstName + " " + lastName} </p>
                 <p>{username}</p>

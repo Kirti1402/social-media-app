@@ -27,6 +27,7 @@ export default function EditProfile({ user }) {
         </label>
       </div>
       <button className="update-btn" onClick={onclickUpdate}>Update</button>
+      <button className="update-btn" onClick={()=>setEditProfileBtn(!editProfileBtn)}>Cancel</button>
     </div>
   );
 }
