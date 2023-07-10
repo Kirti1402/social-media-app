@@ -39,7 +39,6 @@ export default function ProfileCard() {
     backgroundImage,
   } = detail;
 
-  console.log(detail)
 
   const handleFollowUnfollow = (_id) => {
     if (followUnfollow.includes(_id)) {

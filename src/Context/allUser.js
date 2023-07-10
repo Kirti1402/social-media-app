@@ -62,7 +62,6 @@ export const UserProvider = ({ children }) => {
         body: JSON.stringify(post),
       });
       const response = await user.json();
-      console.log("Edit User",response)
     } catch (e) {
       console.log(e);
     }

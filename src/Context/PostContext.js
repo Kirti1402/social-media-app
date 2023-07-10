@@ -137,7 +137,6 @@ export const PostProvider = ({ children }) => {
         body: JSON.stringify(post),
       });
       const response = await user.json();
-      console.log("createPost",response)
       postDispatch({ type: "SET_ALL_POST", payload: response.posts });
     } catch (e) {
       console.log(e);
@@ -161,7 +160,6 @@ export const PostProvider = ({ children }) => {
   };
 
   const editPost = async (postID, postContent) => {
-    console.log("EditPost",postContent,`/api/posts/edit/${postID}`)
     try {
       const user = await fetch(`/api/posts/edit/${postID}`, {
         method: "POST",
@@ -171,7 +169,6 @@ export const PostProvider = ({ children }) => {
         body: JSON.stringify(postContent),
       });
       const response = await user.json();
-      console.log("EditResponse",response);
       postDispatch({ type: "SET_ALL_POST", payload: response.posts });
     } catch (e) {
       console.log(e);

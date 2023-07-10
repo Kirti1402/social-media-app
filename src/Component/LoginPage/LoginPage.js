@@ -3,7 +3,6 @@ import { authContext } from "../../Context/AuthContext";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { toast } from "react-toastify";
 import "./Login.css";
 import MainBanner from "./MainBanner";
@@ -85,7 +84,7 @@ export default function LoginPage() {
             component="button"
             variant='h6'
           >
-            Create an Account <FontAwesomeIcon icon="fa-thin fa-arrow-up-right-from-square" />
+            Create an Account
           </Link>
         </div>
       </div>

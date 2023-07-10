@@ -11,7 +11,6 @@ export default function EditProfile({ user }) {
     editUser({editBio,editLink})
     setEditProfileBtn(!editProfileBtn)
   }
-  console.log(user,setEditProfileBtn);
   return (
     <div className="edit-user">
       <div>
