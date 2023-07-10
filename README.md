@@ -37,4 +37,4 @@
 > HTML5
 
 # Live Project
-[ExploreTogther](https://exploretogther.netlify.app/login)
+[ExploreTogther](https://exploretogther.netlify.app/)
