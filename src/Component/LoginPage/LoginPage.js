@@ -54,6 +54,7 @@ export default function LoginPage() {
           </div>
           <div>
             <TextField
+            type="password"
               id="outlined-basic"
               size="small"
               label="Password"
