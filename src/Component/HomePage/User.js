@@ -153,11 +153,9 @@ export default function User() {
         <div key={_id} className="post-Card">
           <div className="post-user-detail">
             <div>
-              <img
-                className="post-profile-image"
-                src={avatar}
-                alt={username}
-              />
+
+{avatar? <img className="post-profile-image" src={avatar} alt={username}/>: <img className="post-profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
+
             </div>
             <div>
               <p>{firstName + " " + lastName} </p>

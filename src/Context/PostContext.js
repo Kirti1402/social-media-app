@@ -134,7 +134,6 @@ export const PostProvider = ({ children }) => {
         headers: {
           authorization: `${token}`,
         },
-
         body: JSON.stringify(post),
       });
       const response = await user.json();

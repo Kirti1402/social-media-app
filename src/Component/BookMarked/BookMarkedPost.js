@@ -61,7 +61,7 @@ export default function BookMarkedPost() {
             <div className="post-Card">
               <div className="post-user-detail">
                 <div>
-                {avatar? <img className="profile-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg" />}
+                {avatar? <img className="post-profile-image" src={avatar} />: <img className="post-profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
              
                 </div>
                 <div>

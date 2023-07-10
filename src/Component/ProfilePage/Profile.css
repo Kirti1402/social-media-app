@@ -1,6 +1,6 @@
 .page-container {
   display: grid;
-  grid-template-columns: 1fr 2fr 1.5fr; 
+  grid-template-columns: 1fr 2fr 1.5fr;
   grid-gap: 10px;
 }
 
@@ -28,7 +28,7 @@
   border-radius: 100%;
   border: 0.2rem solid black;
 }
-.avatar-image{
+.avatar-image {
   width: 100px;
   height: 100px;
   border-radius: 100%;
@@ -40,33 +40,31 @@
 .profile-image-container {
   margin-left: 10px;
   position: absolute;
-  bottom:0;
+  bottom: 0;
   left: 0;
 }
-.background-image{
+.background-image {
   width: 100%;
   height: 150px;
 }
-.avatar-user-detail{
-
+.avatar-user-detail {
   position: relative;
-  
 }
-.user-desc{
+.user-desc {
   position: absolute;
-  transform: translate(0,-50%);
+  transform: translate(0, -50%);
   display: flex;
 }
 
-.username-desc{
-  transform: translate(0,50%);
+.username-desc {
+  transform: translate(0, 50%);
   display: flex;
   flex-direction: column;
   height: 6rem;
-  margin:0 1rem;
+  margin: 0 1rem;
 }
 
-.followers-following{
+.followers-following {
   display: flex;
   margin-top: 4rem;
   align-items: center;
@@ -74,9 +72,7 @@
 
 .followers-following > * {
   margin: 0 1rem;
-
 }
-
 
 .follower-btn {
   position: relative;
@@ -117,10 +113,10 @@
   padding: 5px 0;
 }
 
-.action-btn{
-  margin:1rem;
+.action-btn {
+  margin: 1rem;
 }
-.action-btn button{
+.action-btn button {
   background-color: coral;
   padding: 0.5rem;
   border-radius: 0.3rem;
@@ -129,56 +125,56 @@
   font-size: 1rem;
 }
 
-.link-user-display{
+.link-user-display {
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: black;
 }
 
-.link-user-display:hover{
+.link-user-display:hover {
   color: darkseagreen;
   font-weight: 700;
 }
 
-.profile-timeline{
+.profile-timeline {
   /* margin: 4rem; */
 }
 
-.bio-detail{
-  margin-top:50px;
+.bio-detail {
+  margin-top: 50px;
   font-size: 15px;
   font-family: cursive;
 }
 
-.edit-user{
+.edit-user {
   background-color: whitesmoke;
   padding: 5px;
   box-shadow: 0 0 2px 2px lightgrey;
   border-radius: 5px;
 }
 
-.edit-user >* {
-  margin :5px;
+.edit-user > * {
+  margin: 5px;
 }
 
-.edit-input{
+.edit-input {
   display: flex;
   justify-content: space-between;
 }
 
-.inputfield{
+.inputfield {
   width: 100%;
   padding: 5px;
   outline: none;
 }
-.update-btn{
-  margin-left:5px ;
+.update-btn {
+  margin-left: 5px;
   padding: 2px;
-  border:none;
+  border: none;
   background-color: azure;
 }
 
-.edit-delete-btn>*{
+.edit-delete-btn > * {
   margin: 5px;
 }

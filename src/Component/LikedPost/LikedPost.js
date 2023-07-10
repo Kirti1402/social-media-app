@@ -49,7 +49,7 @@ export default function LikedPost() {
           <div className="post-Card">
             <div className="post-user-detail">
               <div>
-                <img className="post-profile-image" src={avatar} />
+              {avatar? <img className="post-profile-image" src={avatar} />: <img className="post-profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
               </div>
               <div>
                 <p>{firstName + " " + lastName} </p>
