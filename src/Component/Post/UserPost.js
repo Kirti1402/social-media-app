@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart ,faBookmark} from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import "./Post.css";
+import av1 from "../../Assets/av1.png";
+import av2 from "../../Assets/av2.png";
+import av3 from "../../Assets/av3.png";
+import av4 from "../../Assets/av4.png";
 
 export default function UserPost() {
   const loggedInUser = JSON.parse(localStorage.getItem("User"));
@@ -24,10 +28,12 @@ export default function UserPost() {
     deletePost,
     editPost
   } = useContext(PostContext);
+
+  
   let userPost ;
   userPost = postState.post;
-  useEffect(() => {
-  },[]) 
+  console.log("userpost",userPost)
+
   const [showOptions, setShowOptions] = useState(false);
 
   const handleClick = (post) => {
@@ -79,6 +85,9 @@ export default function UserPost() {
     editPost(postID,{content:editcontent});
     setEditBtn(false);
   }
+
+
+  console.log("userPost",userPost);
   return (
     <>
       {userPost &&
@@ -95,11 +104,12 @@ export default function UserPost() {
             lastName,
             avatar,
           } = post;
+          // 
           return (
             <div key={_id} className="post-Card">
               <div className="post-user-detail">
                 <div>
-                {avatar? <img className="profile-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
+                {(username  === loggedInUser.username)? <img className="profile-image" src={loggedInUser.avatar} />:<img className="profile-image" src={avatar} />}
              
                 </div>
                 <div>

@@ -137,9 +137,7 @@
   font-weight: 700;
 }
 
-.profile-timeline {
-  /* margin: 4rem; */
-}
+
 
 .bio-detail {
   margin-top: 50px;
@@ -148,7 +146,6 @@
 }
 
 .edit-user {
-  background-color: whitesmoke;
   padding: 5px;
   box-shadow: 0 0 2px 2px lightgrey;
   border-radius: 5px;
@@ -160,19 +157,22 @@
 
 .edit-input {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .inputfield {
-  width: 100%;
+  width: 400px;
   padding: 5px;
   outline: none;
 }
-.update-btn {
-  margin-left: 5px;
-  padding: 2px;
+.update-btn-profile {
+
+  margin: 5px;
+  padding: 5px;
   border: none;
-  background-color: azure;
+border-radius: 5px;
+  background-color: darkcyan;
+  color: #fff;
 }
 
 .edit-delete-btn > * {

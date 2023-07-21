@@ -97,9 +97,12 @@ export default function User() {
           (a, b) => new Date(b.likes.likeCount) - new Date(a.likes.likeCount)
         );
 
-  const onClickUpdate = () =>{
-    editPost(postID,{content:editcontent,avatar:"",username:"Kittu@0128"});
+  const onClickUpdate = (_id) =>{
+    setShowOptions(false);
     setEditBtn(false);
+    editPost(postID,{content:editcontent,username:"Kittu@0128"});
+    // const updatedArray = editDelete.filter((id) => id !== _id);
+    //   setEditDelete(updatedArray);
   }
 
   const trendingBtnHandle = () => {
@@ -210,7 +213,7 @@ export default function User() {
                 />
                 </div>
                 <div>
-                <button className="update-btn" onClick={onClickUpdate}>Update</button>
+                <button className="update-btn" onClick={()=>onClickUpdate(_id)}>Update</button>
                 </div>
               </div>
               }

@@ -24,18 +24,19 @@ export default function ProfileCard() {
   } = useContext(FollowUnfollowcontext);
   const {getUserPost} = useContext(PostContext);
   const detail = userDetailState.userData;
+  console.log("detail",detail)
 
   const {
     _id,
     firstName,
     lastName,
-    username,
+    username,editBio,
     followers,
     following,
     logged,
     avatar,
     bio,
-    link,
+    link,editLink,
     backgroundImage,
   } = detail;
 
@@ -78,8 +79,8 @@ export default function ProfileCard() {
             </div>
           </div>
           <div className="bio-detail">
-            <p><span>Bio:</span>{bio}</p>
-            <p><span>Profile:</span><a href={link} target="#">{link}</a></p>
+            <p><span>Bio:</span>  <span>{bio}</span></p>
+            <p><span>Profile:</span> <a href={link} target="#">{link}</a> </p>
           </div>
           <div className="followers-following">
             <div className="follower-btn">
@@ -122,7 +123,7 @@ export default function ProfileCard() {
           </div>
         </>
       )}
-      {editProfileBtn && <EditProfile user = {detail} edit={setEditProfileBtn}/>}
+      {(editProfileBtn && (username == loggedInUser.username)) && <EditProfile user = {detail} edit={setEditProfileBtn}/>}
     </div>
   );
 }

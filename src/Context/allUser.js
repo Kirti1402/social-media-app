@@ -1,10 +1,18 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 import { userIntialState, userReducer } from "../Reducer/AllUserReducer";
 import { profilIntialstate, profileReducer } from "../Reducer/ProfileReducer";
+import { postIntialState, postUserReducer } from "../Reducer/PostReducer";
+import axios from 'axios';
+// import { PostContext } from "./PostContext";
+
+
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  // const {
+  //   getUserPost
+  // } = useContext(PostContext);
   const token = localStorage.getItem("EncodedToken");
   const [loggedIn,setLoggedIn] = useState(false);
   const [userId,setUserId] = useState('');
@@ -13,6 +21,10 @@ export const UserProvider = ({ children }) => {
   const [profileState, profileDispatch] = useReducer(
     profileReducer,
     profilIntialstate
+  );
+  const [postState, postDispatch] = useReducer(
+    postUserReducer,
+    postIntialState
   );
 
   const getAllUsers = async () => {
@@ -28,6 +40,7 @@ export const UserProvider = ({ children }) => {
       console.log(e);
     }
   };
+
   const getUserData =  (id) => {
     const loggedInUser = JSON.parse(localStorage.getItem("User"));
     if(id === loggedInUser._id){
@@ -44,6 +57,7 @@ export const UserProvider = ({ children }) => {
         method: "GET",
       });
       const response = await user.json();
+      console.log("setrespective",response)
       localStorage.setItem('userDetail', JSON.stringify(response.user));
       userDetailDispatch({ type: "SET_USER_DATA", payload: response.user });
       setLoggedIn(!loggedIn)
@@ -52,27 +66,37 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const editUser = async (post) => {
+  const editUser = async (post,id) => {
     try {
-      const user = await fetch(`/api/users/edit`, {
-        method: "POST",
-        headers: {
-          authorization: `${token}`,
+      const user = await axios.post(
+        `/api/users/edit`,
+        { userData: post },
+        {
+          headers: {
+            authorization: token,
+          },
         },
-        body: JSON.stringify(post),
-      });
-      const response = await user.json();
+      );
+      console.log("EditUSer",user.data.user)
+      localStorage.setItem('User', JSON.stringify(user.data.user));
+      
+      userDetailDispatch({ type: "SET_USER_DATA", payload: user.data.user });
+      // postDispatch({type:"SET_POST",payload:post})
+      // const response = await user.json();
+      setUserDataRespectivePage(id)
+      // getUserPost(username);
     } catch (e) {
       console.log(e);
     }
   }
+  console.log("first",userDetailState)
 
  
 
   useEffect(() => {
     getAllUsers();
   
-  }, [ ]);
+  }, [ profileState]);
 
   return (
     <UserContext.Provider value={{ userDetailState,getUserData,profileState, profileDispatch,userDetailDispatch,userId,setUserId,loggedIn,setLoggedIn,editUser,editProfileBtn,setEditProfileBtn }}>{children}</UserContext.Provider>

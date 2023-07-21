@@ -1,6 +1,7 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import { postIntialState, postUserReducer } from "../Reducer/PostReducer";
 import { toast } from "react-toastify";
+import axios from 'axios';
 
 export const PostContext = createContext();
 
@@ -129,14 +130,19 @@ export const PostProvider = ({ children }) => {
 
   const createPost = async (post) => {
     try {
-      const user = await fetch("/api/posts", {
-        method: "POST",
-        headers: {
-          authorization: `${token}`,
-        },
-        body: JSON.stringify(post),
-      });
-      const response = await user.json();
+      const user = await axios.post(`/api/posts`,
+        { postData: post },
+        {
+          headers: {
+            authorization: `${token}`,
+          },
+        }
+        
+        
+      );
+      // console.log("user",user)
+      const response = user.data;
+      // console.log("response",user.data.posts)
       postDispatch({ type: "SET_ALL_POST", payload: response.posts });
     } catch (e) {
       console.log(e);
@@ -161,15 +167,17 @@ export const PostProvider = ({ children }) => {
 
   const editPost = async (postID, postContent) => {
     try {
-      const user = await fetch(`/api/posts/edit/${postID}`, {
-        method: "POST",
-        headers: {
-          authorization: `${token}`,
-        },
-        body: JSON.stringify(postContent),
-      });
-      const response = await user.json();
-      postDispatch({ type: "SET_ALL_POST", payload: response.posts });
+      const user = await axios.post(`/api/posts/edit/${postID}`,
+      {postData: postContent},
+        {
+          headers: {
+            authorization: `${token}`,
+          }
+        }
+       );
+      console.log("Editresponse",user)
+      const response = user.data.posts;
+      postDispatch({ type: "SET_ALL_POST", payload: response });
     } catch (e) {
       console.log(e);
     }
@@ -204,6 +212,7 @@ export const PostProvider = ({ children }) => {
         editPost,
         refreshFlag,
         setRefreshFlag,
+        getAllPost
       }}
     >
       {children}

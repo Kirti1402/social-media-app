@@ -5,14 +5,11 @@ import { authContext } from "../../Context/AuthContext";
 import { PostContext } from "../../Context/PostContext";
 
 export default function Header() {
-  const navigate = useNavigate();
   const { getUserPost } = useContext(PostContext);
   const { userDetailState, getUserData, userId, setUserId } =
     useContext(UserContext);
   let profile = userDetailState.users.filter(({ logged }) => logged === true);
   const { userDataState, userDataDispatch } = useContext(authContext);
-
-  const userDetail = JSON.parse(localStorage.getItem("User"));
 
   const getUserDataHandle = (id, username) => {
     getUserData(id);
