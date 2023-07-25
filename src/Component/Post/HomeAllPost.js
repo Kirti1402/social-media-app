@@ -65,7 +65,7 @@ export default function HomeAllPost() {
       });
     }
   }
-
+  const loggedInUser = JSON.parse(localStorage.getItem("User"));
   return (
     <>
       <div className="filtered-container">
@@ -93,7 +93,7 @@ export default function HomeAllPost() {
               
               <div className="post-user-detail">
                 <div >
-                {avatar? <img className="profile-image" src={avatar} />: <img className="profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
+                {username === loggedInUser.username? <img className="profile-image" src={loggedInUser.avatar} />: <img className="profile-image" src={avatar} />}
                 </div>
                 <div>
                   <p>{firstName + " " + lastName} </p>

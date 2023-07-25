@@ -157,7 +157,7 @@ export default function User() {
           <div className="post-user-detail">
             <div>
 
-{avatar? <img className="post-profile-image" src={avatar} alt={username}/>: <img className="post-profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
+{(avatar)? <img className="post-profile-image" src={loggedInUser.avatar} alt={username}/>: <img className="post-profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
 
             </div>
             <div>

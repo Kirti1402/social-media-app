@@ -29,6 +29,7 @@ export default function LikedPost() {
         setBookmarkID(updatedArray);
       }
     }
+    const loggedInUser = JSON.parse(localStorage.getItem("User"));
   return (
     <>
     {likedPost ? 
@@ -49,7 +50,7 @@ export default function LikedPost() {
           <div className="post-Card">
             <div className="post-user-detail">
               <div>
-              {avatar? <img className="post-profile-image" src={avatar} />: <img className="post-profile-image" src="https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg" />}
+              {username === loggedInUser.username? <img className="profile-image" src={loggedInUser.avatar} />: <img className="profile-image" src={avatar} />}
               </div>
               <div>
                 <p>{firstName + " " + lastName} </p>
