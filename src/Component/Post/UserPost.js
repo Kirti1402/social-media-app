@@ -1,21 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import { PostContext } from "../../Context/PostContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart ,faBookmark} from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import "./Post.css";
-import av1 from "../../Assets/av1.png";
-import av2 from "../../Assets/av2.png";
-import av3 from "../../Assets/av3.png";
-import av4 from "../../Assets/av4.png";
+
 
 export default function UserPost() {
   const loggedInUser = JSON.parse(localStorage.getItem("User"));
-  const [editDelete,setEditDelete] = useState([]);
-  const [editBtn ,setEditBtn] = useState(false);
-  const [editAvatar,setEditavatar] = useState("");
-  const [editcontent,setEditContent] = useState("");
-  const [postID,setPostID] = useState(null);
   const {
     postState,
     likedPostID,
@@ -25,8 +17,6 @@ export default function UserPost() {
     postDisLikeHandler,
     bookmarkedID,
     setBookmarkID,
-    deletePost,
-    editPost
   } = useContext(PostContext);
 
   
@@ -34,20 +24,6 @@ export default function UserPost() {
   userPost = postState.post;
   console.log("userpost",userPost)
 
-  const [showOptions, setShowOptions] = useState(false);
-
-  const handleClick = (post) => {
-
-    if (!editDelete.includes(post._id)){
-      setShowOptions(true);
-      setEditDelete([...editDelete,post._id]);
-    } else {
-      setShowOptions(false);
-      const updatedArray = editDelete.filter((id) => id !== post._id);
-      setEditDelete(updatedArray);
-    }
-
-  };
   const likedDisLikePost = (post, index) => {
     if (!likedPostID.includes(post._id)) {
       postLikeHandler(post._id);
@@ -74,17 +50,7 @@ export default function UserPost() {
       });
     }
   }
-  const onclickEditHandle = (post) =>{
-    setEditBtn(true)
-    setEditavatar(post.avatar)
-    setEditContent(post.content)
-    setPostID(post._id);
-  }
 
-  const onClickUpdate = () =>{
-    editPost(postID,{content:editcontent});
-    setEditBtn(false);
-  }
 
 
   console.log("userPost",userPost);
@@ -145,33 +111,7 @@ export default function UserPost() {
               </div>
               {loggedInUser.username === username && <div className="post-card-menu">
                 
-                <button onClick={()=>handleClick(post)} className="showBtn">
-                  {(showOptions && editDelete.includes(_id)) ? "X" : "○○○"}
-                </button>
-                {(showOptions && editDelete.includes(_id)) && (
-                  <div className="options">
-                    <button className="showBtn edit" onClick={()=>onclickEditHandle(post)}>Edit</button>
-                    {
-                    (editBtn) &&  <div className="post-user-detail-edit">
-                      <div className="editPost-content">
-                    <img
-                    className="post-profile-image"
-                    src={editAvatar}
-                    alt="image"
-                  />
-                    <textarea className='edit-textarea'
-                      value={editcontent}
-                      onChange={(e) => setEditContent(e.target.value)}
-                    />
-                    </div>
-                    <div>
-                    <button className="update-btn" onClick={onClickUpdate}>Update</button>
-                    </div>
-                  </div>
-                  }
-                    <button className="showBtn delete" onClick={()=>deletePost(_id)}>Delete</button>
-                  </div>
-                )}
+               
               </div>}
                   
             </div>
